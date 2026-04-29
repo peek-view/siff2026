@@ -1,0 +1,5780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIFF 2026 Conflict Guide · May 7–17</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SIFF 2026 Conflict Guide — design language
+   Palette riffs on the program PDF (neon magenta/cyan/yellow on
+   near-black) but pushes toward editorial-film-festival.
+   ============================================================ */
+:root {
+  --bg: #0a0a0f;
+  --bg-panel: #12121a;
+  --bg-elevated: #1a1a24;
+  --ink: #f4f4f0;
+  --ink-dim: #9a9aa8;
+  --ink-faint: #5a5a68;
+  --rule: #2a2a36;
+  --rule-strong: #3a3a48;
+
+  --magenta: #ff2db4;
+  --cyan: #00e5ff;
+  --yellow: #ffd400;
+  --coral: #ff5940;
+  --lime: #b4ff3c;
+  --violet: #b985ff;
+
+  --conflict-bg: rgba(255, 45, 180, 0.06);
+  --conflict-rule: rgba(255, 45, 180, 0.4);
+
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-body: "Inter Tight", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(1200px circle at 10% 0%, rgba(255,45,180,0.08), transparent 50%),
+    radial-gradient(900px circle at 95% 15%, rgba(0,229,255,0.06), transparent 50%),
+    radial-gradient(700px circle at 50% 100%, rgba(255,212,0,0.04), transparent 50%);
+  background-attachment: fixed;
+}
+
+/* ------------------- Header ------------------- */
+header.masthead {
+  padding: 4rem 2rem 2.5rem;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+}
+header.masthead::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), var(--rule) 100%);
+  background-size: 8.333% 100%;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.masthead-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.eyebrow .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--magenta);
+  box-shadow: 0 0 20px var(--magenta);
+  display: inline-block;
+}
+h1.title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  margin-bottom: 1.5rem;
+}
+h1.title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--yellow);
+}
+.tagline {
+  font-size: 1.05rem;
+  color: var(--ink-dim);
+  max-width: 62ch;
+  margin-bottom: 2rem;
+  line-height: 1.55;
+}
+.tagline strong { color: var(--ink); font-weight: 600; }
+
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.stat {
+  padding: 1rem 1.25rem;
+  border-right: 1px solid var(--rule);
+}
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 0.4rem;
+}
+
+/* ------------------- Legend / how-to-read ------------------- */
+.legend {
+  max-width: 1400px;
+  margin: 2rem auto 0;
+  padding: 1.25rem 2rem;
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+  align-items: center;
+}
+.legend-item { display: flex; align-items: center; gap: 0.5rem; }
+.legend-swatch {
+  width: 12px; height: 12px; border-radius: 2px;
+}
+.swatch-conflict { background: var(--magenta); }
+.swatch-ok { background: var(--lime); }
+
+/* ------------------- Day navigation ------------------- */
+nav.days {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 15, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.75rem 1.5rem;
+  margin-top: 1.5rem;
+}
+.days-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.day-tab {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink-dim);
+  cursor: pointer;
+  border-radius: 2px;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  min-width: max-content;
+}
+.day-tab:hover {
+  background: var(--bg-elevated);
+  color: var(--ink);
+}
+.day-tab.active {
+  background: var(--ink);
+  color: var(--bg);
+}
+.day-tab-weekday {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  opacity: 0.7;
+}
+.day-tab-date {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* ------------------- Filters ------------------- */
+.filters {
+  max-width: 1400px;
+  margin: 1.5rem auto 0;
+  padding: 0 2rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.filter-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-right: 0.5rem;
+}
+.filter-pill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--ink-dim);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.filter-pill:hover { color: var(--ink); border-color: var(--rule-strong); }
+.filter-pill.active {
+  background: var(--cyan);
+  color: var(--bg);
+  border-color: var(--cyan);
+}
+
+/* ------------------- Day sections ------------------- */
+main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+section.day {
+  margin-bottom: 4rem;
+  scroll-margin-top: 5rem;
+}
+
+.day-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 1.5rem 0 1.25rem;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.day-header-weekday {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--magenta);
+}
+.day-header-date {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 3.5rem;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+.day-header-meta {
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+  margin-left: auto;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+.day-header-meta strong {
+  color: var(--magenta);
+  font-weight: 700;
+}
+
+/* ------------------- Conflict groups ------------------- */
+.slot {
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+.slot.has-conflict {
+  background: var(--conflict-bg);
+  border-left: 2px solid var(--magenta);
+  padding: 1rem 1.25rem;
+  margin-left: -1.25rem;
+  margin-right: -1.25rem;
+}
+.slot-header {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.slot.has-conflict .slot-header {
+  color: var(--magenta);
+}
+.slot-badge {
+  background: var(--magenta);
+  color: var(--bg);
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.slot-time-range {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.films-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+.slot.has-conflict .films-row {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* ------------------- Film card ------------------- */
+.film-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1rem 1.1rem 0.85rem;
+  transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.film-card:hover {
+  border-color: var(--cyan);
+  transform: translateY(-1px);
+  background: var(--bg-elevated);
+}
+.film-card.open {
+  border-color: var(--cyan);
+  background: var(--bg-elevated);
+}
+
+.film-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 2.4rem;   /* clear the skip button at top-left */
+  padding-right: 2.4rem;  /* clear the pick button at top-right */
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-dim);
+}
+.film-time {
+  color: var(--yellow);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.film-venue {
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+}
+.film-venue.venue-uptown { color: #4dd4ff; }
+.film-venue.venue-downtown { color: #ff8a5c; }
+.film-venue.venue-filmcenter { color: #b4ff3c; }
+.film-venue.venue-pacsci { color: #b985ff; }
+.film-venue.venue-paramount { color: var(--yellow); }
+.film-venue.venue-library { color: var(--ink-dim); }
+
+.film-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.4rem;
+  color: var(--ink);
+}
+.film-tagline {
+  font-size: 0.8rem;
+  color: var(--ink-dim);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0.6rem;
+}
+.film-card.open .film-tagline {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+.film-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--rule);
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.05em;
+}
+.film-runtime {
+  color: var(--ink-dim);
+}
+.film-categories {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.film-cat {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.4rem;
+  border-radius: 2px;
+  background: var(--rule);
+  color: var(--ink-dim);
+}
+
+/* ------------------- Programmer's Picks ------------------- */
+/* A small cyan badge on the card footer showing count */
+.picks-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 100px;
+  background: rgba(0, 229, 255, 0.12);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.picks-badge .picks-count {
+  font-weight: 700;
+}
+.film-card.has-picks {
+  /* a thin cyan tint on the left edge to hint at picks */
+  box-shadow: inset 2px 0 0 rgba(0, 229, 255, 0.35);
+}
+.film-card.has-picks.picked {
+  /* when user-starred AND programmer-picked, user's star wins visually */
+  box-shadow: inset 2px 0 0 rgba(255, 212, 0, 0.35);
+}
+
+/* Picks block in expanded detail */
+.programmer-picks {
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--rule);
+}
+.programmer-picks-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.programmer-pick {
+  margin-bottom: 0.65rem;
+  padding-left: 0.7rem;
+  border-left: 2px solid rgba(0, 229, 255, 0.25);
+}
+.programmer-pick:last-child { margin-bottom: 0; }
+.programmer-pick-name {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.1rem;
+}
+.programmer-pick-role {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+.programmer-pick-blurb {
+  font-size: 0.82rem;
+  color: var(--ink-dim);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Pick-filter pill styled cyan to match */
+.filter-pill.filter-pill-picks {
+  border-color: rgba(0, 229, 255, 0.4);
+  color: var(--cyan);
+}
+.filter-pill.filter-pill-picks.active {
+  background: var(--cyan);
+  color: var(--bg);
+  border-color: var(--cyan);
+}
+.filter-pill.filter-pill-skipped {
+  border-color: rgba(255, 100, 100, 0.4);
+  color: var(--coral);
+}
+.filter-pill.filter-pill-skipped.active {
+  background: var(--coral);
+  color: var(--bg);
+  border-color: var(--coral);
+}
+
+/* ------------------- Pick star button ------------------- */
+.pick-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--ink-faint);
+  transition: all 0.15s ease;
+  z-index: 2;
+  padding: 0;
+}
+.pick-btn:hover {
+  background: var(--bg);
+  border-color: var(--rule-strong);
+  color: var(--yellow);
+  transform: scale(1.1);
+}
+.pick-btn.picked {
+  color: var(--yellow);
+  text-shadow: 0 0 12px rgba(255, 212, 0, 0.6);
+}
+.pick-btn.picked:hover {
+  color: var(--coral);
+  text-shadow: none;
+}
+
+/* ------------------- Skip / "Not interested" button ------------------- */
+.skip-btn {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;  /* opposite corner from the star button */
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+  color: var(--ink-faint);
+  opacity: 0.3;  /* quite subtle until hover */
+  transition: all 0.15s ease;
+  z-index: 2;
+  padding: 0;
+}
+.film-card:hover .skip-btn {
+  opacity: 0.6;  /* show up more clearly when hovering the card */
+}
+.skip-btn:hover {
+  background: var(--bg);
+  border-color: var(--rule-strong);
+  color: var(--coral);
+  opacity: 1;
+  transform: scale(1.1);
+}
+.skip-btn.skipped {
+  color: var(--coral);
+  opacity: 1;
+}
+.skip-btn.skipped:hover {
+  color: var(--ink);
+}
+
+/* Card-level dimming when skipped */
+.film-card.skipped {
+  opacity: 0.35;
+  filter: grayscale(0.7);
+}
+.film-card.skipped .film-title {
+  text-decoration: line-through;
+  text-decoration-color: var(--coral);
+  text-decoration-thickness: 2px;
+}
+.film-card.skipped:hover {
+  opacity: 0.7;
+  filter: grayscale(0.3);
+}
+.film-card.skipped.open {
+  opacity: 1;
+  filter: none;
+}
+.film-card.picked {
+  border-color: rgba(255, 212, 0, 0.5);
+  background: linear-gradient(135deg, var(--bg-panel) 0%, rgba(255, 212, 0, 0.04) 100%);
+}
+.film-card.picked:hover,
+.film-card.picked.open {
+  border-color: var(--yellow);
+}
+
+/* When a picked card lives inside a conflict slot, it should visually "win" */
+.slot.has-conflict .film-card.picked {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 1px var(--yellow);
+}
+
+/* ------------------- Picks counter in header ------------------- */
+.picks-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.15rem 0.5rem;
+  background: rgba(255, 212, 0, 0.12);
+  border: 1px solid rgba(255, 212, 0, 0.3);
+  border-radius: 100px;
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+.picks-counter-num {
+  font-weight: 700;
+}
+
+/* ------------------- "My Picks" day tab (special styling) ------------------- */
+.day-tab.picks-tab {
+  margin-right: 0.75rem;
+  border: 1px solid var(--yellow);
+  color: var(--yellow);
+  background: rgba(255, 212, 0, 0.06);
+}
+.day-tab.picks-tab:hover {
+  background: rgba(255, 212, 0, 0.12);
+  color: var(--yellow);
+}
+.day-tab.picks-tab.active {
+  background: var(--yellow);
+  color: var(--bg);
+}
+.day-tab.picks-tab .day-tab-weekday {
+  color: inherit;
+}
+
+/* ------------------- Picks view ------------------- */
+#picks-view {
+  display: none;
+}
+#picks-view.active {
+  display: block;
+}
+.picks-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--ink-dim);
+}
+.picks-empty-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.picks-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.picks-action-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.9rem;
+  background: transparent;
+  color: var(--ink-dim);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.picks-action-btn:hover {
+  border-color: var(--coral);
+  color: var(--coral);
+}
+.picks-warning {
+  background: rgba(255, 45, 180, 0.08);
+  border-left: 2px solid var(--magenta);
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.5rem;
+  color: var(--ink-dim);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  border-radius: 2px;
+}
+.picks-warning strong { color: var(--magenta); }
+
+.picks-day-group {
+  margin-bottom: 2.5rem;
+}
+.picks-day-label {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 1rem;
+}
+.picks-day-weekday {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--yellow);
+}
+.picks-day-date {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Storage-unavailable banner */
+.storage-notice {
+  max-width: 1400px;
+  margin: 1rem auto 0;
+  padding: 0.6rem 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  color: var(--ink-faint);
+  text-align: right;
+}
+.storage-notice.warning {
+  color: var(--coral);
+}
+
+/* ------------------- Expanded detail ------------------- */
+.film-detail {
+  display: none;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--rule-strong);
+}
+.film-card.open .film-detail {
+  display: block;
+}
+.film-credits {
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+  line-height: 1.45;
+  margin-bottom: 0.65rem;
+  font-style: italic;
+}
+.film-premiere {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  margin-bottom: 0.65rem;
+}
+.film-tag {
+  display: inline-block;
+  background: var(--coral);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  margin-bottom: 0.65rem;
+}
+.trailer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.9rem;
+  background: var(--magenta);
+  color: var(--ink);
+  text-decoration: none;
+  border-radius: 2px;
+  font-weight: 700;
+  transition: all 0.15s ease;
+  margin-top: 0.5rem;
+  margin-right: 0.4rem;
+  border: none;
+  cursor: pointer;
+}
+.trailer-btn:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+.siff-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.9rem;
+  background: transparent;
+  color: var(--cyan);
+  text-decoration: none;
+  border-radius: 2px;
+  font-weight: 700;
+  transition: all 0.15s ease;
+  margin-top: 0.5rem;
+  border: 1px solid var(--cyan);
+  cursor: pointer;
+}
+.siff-link-btn:hover {
+  background: var(--cyan);
+  color: var(--bg);
+}
+.trailer-embed {
+  margin-top: 0.75rem;
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  display: none;
+}
+.trailer-embed.open { display: block; }
+.trailer-embed iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+
+.other-showings {
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--rule);
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+}
+.other-showings-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 0.3rem;
+}
+.other-showing {
+  display: inline-block;
+  padding: 0.15rem 0.4rem;
+  margin: 0.15rem 0.15rem 0 0;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-dim);
+  cursor: pointer;
+  text-decoration: none;
+}
+.other-showing:hover { color: var(--cyan); border-color: var(--cyan); }
+.other-showing.this-showing {
+  cursor: default;
+  border-color: var(--yellow);
+  color: var(--yellow);
+  background: rgba(255, 212, 0, 0.08);
+  font-weight: 700;
+}
+.other-showing.this-showing:hover {
+  color: var(--yellow);
+  border-color: var(--yellow);
+}
+.you-are-here {
+  font-weight: 400;
+  font-style: italic;
+  opacity: 0.85;
+  margin-left: 0.25rem;
+}
+
+/* Showing N/M badge on the card meta row */
+.film-meta-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.showing-num {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.12rem 0.4rem;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--rule);
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+/* ------------------- No conflict marker ------------------- */
+.conflict-summary {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  padding: 0.5rem 0;
+  letter-spacing: 0.04em;
+}
+
+/* ------------------- Footer ------------------- */
+footer {
+  max-width: 1400px;
+  margin: 4rem auto 0;
+  padding: 2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8rem;
+  color: var(--ink-dim);
+  line-height: 1.6;
+}
+footer a { color: var(--cyan); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+footer strong { color: var(--ink); }
+
+/* ------------------- Responsive ------------------- */
+@media (max-width: 768px) {
+  header.masthead { padding: 2.5rem 1.25rem 1.5rem; }
+  .stat { padding: 0.75rem 0.9rem; }
+  .stat-num { font-size: 1.5rem; }
+  main { padding: 1.25rem; }
+  .day-header-date { font-size: 2.25rem; }
+  .day-header-meta { margin-left: 0; width: 100%; }
+  .films-row { grid-template-columns: 1fr; }
+  .slot.has-conflict { margin-left: -0.5rem; margin-right: -0.5rem; padding: 0.75rem 0.75rem; }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { height: 8px; width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--rule-strong); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="eyebrow">
+      <span class="dot"></span>
+      <span>SIFF · 52<sup>nd</sup> Festival · May 7 – 17, 2026</span>
+      <span style="color: var(--ink-faint);">· unofficial conflict planner</span>
+    </div>
+    <h1 class="title">
+      What to see.<br>
+      <em>What you'll miss.</em>
+    </h1>
+    <p class="tagline">
+      Every screening across the 2026 Seattle International Film Festival, grouped by day.
+      When two films overlap — even by a minute — they're flagged as a
+      <strong>conflict</strong>: you'll have to pick. Use the day tabs to navigate,
+      tap any film to read about it and pull up a trailer.
+    </p>
+    <div class="stats-strip">
+      <div class="stat">
+        <div class="stat-num" id="stat-screenings">—</div>
+        <div class="stat-label">Screenings</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="stat-films">—</div>
+        <div class="stat-label">Unique Films</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="stat-venues">—</div>
+        <div class="stat-label">Venues</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="stat-days">11</div>
+        <div class="stat-label">Days</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="stat-conflicts">—</div>
+        <div class="stat-label">Conflict Slots</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="stat-prog-picks" style="color: var(--cyan);">—</div>
+        <div class="stat-label">Prog. Picks</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="stat-picks" style="color: var(--yellow);">0</div>
+        <div class="stat-label">★ Your Picks</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="stat-skips" style="color: var(--coral);">0</div>
+        <div class="stat-label">⊘ Not Interested</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item">
+    <span class="legend-swatch swatch-conflict"></span>
+    <span>Pink group = overlapping films; you must pick one</span>
+  </div>
+  <div class="legend-item">
+    <span style="color: var(--yellow);">★</span>
+    <span>Star a film to save it to <strong style="color: var(--ink);">My Picks</strong> — persists across visits</span>
+  </div>
+  <div class="legend-item">
+    <span style="color: var(--coral); font-size: 1rem;">⊘</span>
+    <span>Mark a film as <strong style="color: var(--ink);">Not Interested</strong> — dims all its showings</span>
+  </div>
+  <div class="legend-item">
+    <span class="picks-badge" style="font-size: 0.6rem;"><span class="picks-count">N</span> picks</span>
+    <span>Recommended by SIFF programmers — tap card to read their blurbs</span>
+  </div>
+  <div class="legend-item">
+    <span style="color: var(--ink-faint); font-family: var(--font-mono); font-size: 0.72rem;">
+      Click card to expand · Trailer opens YouTube search in new tab
+    </span>
+  </div>
+</div>
+
+<div class="storage-notice" id="storage-notice"></div>
+
+<nav class="days">
+  <div class="days-inner" id="day-tabs"></div>
+</nav>
+
+<div class="filters">
+  <span class="filter-label">Venue:</span>
+  <button class="filter-pill active" data-filter-type="venue" data-filter-value="all">All</button>
+  <button class="filter-pill" data-filter-type="venue" data-filter-value="uptown">Uptown</button>
+  <button class="filter-pill" data-filter-type="venue" data-filter-value="downtown">Downtown</button>
+  <button class="filter-pill" data-filter-type="venue" data-filter-value="filmcenter">Film Center</button>
+  <button class="filter-pill" data-filter-type="venue" data-filter-value="pacsci">PacSci</button>
+  <button class="filter-pill" data-filter-type="venue" data-filter-value="paramount">Paramount</button>
+  <span class="filter-label" style="margin-left: 1rem;">Curation:</span>
+  <button class="filter-pill filter-pill-picks" data-filter-type="picks" data-filter-value="any">★ Only Programmers' Picks</button>
+  <button class="filter-pill filter-pill-skipped" data-filter-type="skipped" data-filter-value="hide">⊘ Hide Not Interested</button>
+</div>
+
+<main id="main">
+  <div id="picks-view">
+    <!-- picks rendered here dynamically -->
+  </div>
+  <div id="schedule-view">
+    <!-- day sections rendered here dynamically -->
+  </div>
+</main>
+
+<footer>
+  <p>
+    Built from the SIFF 2026 program guide. Schedule subject to change —
+    always confirm at
+    <a href="https://siff.net/filmfinder" target="_blank" rel="noopener">siff.net/filmfinder</a>
+    before heading to a venue.
+    Tickets: $22 regular / $19 members. Box office: 206.464.5830.
+  </p>
+  <p style="margin-top: 0.75rem;">
+    <strong>Venues</strong> · SIFF Cinema Uptown (511 Queen Anne Ave N) · SIFF Cinema Downtown (2100 4th Ave) ·
+    SIFF Film Center (167 Republican St) · Pacific Science Center (200 Sue Bird Ct) ·
+    Paramount Theatre (911 Pine St) · Seattle Central Library (1000 4th Ave)
+  </p>
+  <p style="margin-top: 0.75rem; color: var(--ink-faint); font-size: 0.75rem;">
+    Conflict logic: any two screenings whose time ranges overlap by one minute or more are grouped together.
+    Runtime used for conflict detection reflects the listed screening runtime; Q&amp;As and special-event programming may extend
+    actual event length. No affiliation with SIFF; this is a personal planning tool.
+  </p>
+</footer>
+
+<!-- DATA + LOGIC -->
+<script id="siff-data" type="application/json">{
+  "films": {
+    "i-love-boosters": {
+      "title": "I Love Boosters",
+      "desc": "A crew of professional shoplifters take aim at a cutthroat fashion maven. It's like community service.",
+      "credits": "d: Boots Riley \u00b7 c: Keke Palmer, Naomi Ackie, Taylour Paige, Poppy Liu, Eiza Gonzalez, LaKeith Stanfield, Don Cheadle, Demi Moore",
+      "runtime": 115,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "Spotlight",
+        "Opening Night"
+      ],
+      "tag": "Opening Night Film \u2014 special event pricing"
+    },
+    "power-ballad": {
+      "title": "Power Ballad",
+      "desc": "When Rick (Rudd), a past-his-prime wedding singer, meets fading boy-band star Danny (Jonas), the two bond over a late-night jam session. But when Danny turns one of Rick's songs into a hit, Rick sets out to reclaim the recognition he believes he deserves.",
+      "credits": "d: John Carney \u00b7 c: Paul Rudd, Nick Jonas, Peter McDonald, Marcella Plunkett, Havana Rose Liu, Jack Reynor",
+      "runtime": 98,
+      "country": "Ireland / USA",
+      "year": 2026,
+      "categories": [
+        "Spotlight"
+      ]
+    },
+    "obsession": {
+      "title": "Obsession",
+      "desc": "When Bear wishes upon a One Wish Willow for his longtime crush to fall madly in love with him, he sets off a horrific and bloody chain of events in this darkly comic, twisted horror fable from writer/director Curry Barker.",
+      "credits": "d: Curry Barker \u00b7 c: Michael Johnston, Inde Navarrette, Cooper Tomlinson, Megan Lawless, Andy Richter",
+      "runtime": 109,
+      "country": "USA",
+      "year": 2025,
+      "categories": [
+        "Spotlight",
+        "WTF"
+      ]
+    },
+    "nightmare-elm-street-djnicfit": {
+      "title": "A Nightmare on Elm Street with DJ NicFit",
+      "desc": "Cross-Faded Cinema returns to the Festival to provide an all-new soundtrack to Wes Craven's iconic horror film, promising a trippy, ultra-sensory time live on two turntables. What will DJ NicFit deem worthy of A Nightmare on Elm Street or this one-of-a-kind music and film hybrid event?",
+      "credits": "",
+      "runtime": 91,
+      "country": "USA",
+      "year": 1984,
+      "categories": [
+        "Spotlight",
+        "Special Event"
+      ]
+    },
+    "the-invite": {
+      "title": "The Invite",
+      "desc": "Joe and Angela's marriage is on thin ice. When they invite their enigmatic upstairs neighbors for a dinner party, the night spirals into unexpected places. Have they reignited the spark or lit the match that burns it all down?",
+      "credits": "d: Olivia Wilde \u00b7 c: Seth Rogen, Olivia Wilde, Pen\u00e9lope Cruz, Edward Norton",
+      "runtime": 107,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "Spotlight",
+        "Closing Night"
+      ],
+      "tag": "Closing Night Film \u2014 special event pricing"
+    },
+    "april-x": {
+      "title": "April X",
+      "desc": "A black-market body parts hustler (Connor Storrie) desperately searches for his missing twin sister who can digitally record her dreams. As he digs deeper, a sinister conspiracy threatens to consume them both in this sci-fi noir thriller.",
+      "credits": "d: Michel K. Parandi",
+      "runtime": 93,
+      "country": "USA / Romania",
+      "year": 2025,
+      "categories": [
+        "New American Cinema",
+        "New American Cinema Competition"
+      ]
+    },
+    "drunken-noodles": {
+      "title": "Drunken Noodles",
+      "desc": "Narrative shifts, flashbacks, folds, and even a dash of magical realism, mark this quiet examination of modern queer relationships, presenting three facets of the romantic life of a young New Yorker.",
+      "credits": "d: Lucio Castro",
+      "runtime": 81,
+      "country": "USA / Argentina",
+      "year": 2025,
+      "categories": [
+        "New American Cinema"
+      ]
+    },
+    "i-want-your-sex": {
+      "title": "I Want Your Sex",
+      "desc": "When fresh-faced Elliot (Cooper Hoffman) lands an exciting job for renowned artist, icon, and provocateur Erika Tracy (Olivia Wilde), his fantasies come true as Erika taps him to become her sexual muse.",
+      "credits": "d: Gregg Araki \u00b7 c: Cooper Hoffman, Olivia Wilde",
+      "runtime": 90,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "New American Cinema"
+      ]
+    },
+    "late-fame": {
+      "title": "Late Fame",
+      "desc": "Willem Dafoe plays a post office employee whose early book of poetry is 'rediscovered' by a group of aspiring artists who adopt him as an elder statesman, flattering him but also causing him to question their authenticity.",
+      "credits": "d: Kent Jones \u00b7 c: Willem Dafoe",
+      "runtime": 96,
+      "country": "USA",
+      "year": 2025,
+      "categories": [
+        "New American Cinema"
+      ]
+    },
+    "see-you-when-i-see-you": {
+      "title": "See You When I See You",
+      "desc": "A comedy writer struggles to process the grief over his younger sister's suicide in this Jay Duplass ensemble 'traumedy,' based on the real-life experiences of screenwriter Adam Clayton-Holland's emotionally raw memoir.",
+      "credits": "d: Jay Duplass",
+      "runtime": 101,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "New American Cinema"
+      ]
+    },
+    "valentina": {
+      "title": "Valentina",
+      "desc": "In this humorous docu-comedy, Keyla Monterrose Mejia shines as the titular character Valentina, a beleaguered El Paso resident confronting city council in her campaign for local economic justice.",
+      "credits": "d: Tatti Ribeiro",
+      "runtime": 84,
+      "country": "USA",
+      "year": 2025,
+      "categories": [
+        "New American Cinema",
+        "New American Cinema Competition"
+      ]
+    },
+    "chili-finger": {
+      "title": "Chili Finger",
+      "desc": "A New American Cinema selection. See siff.net for details.",
+      "credits": "",
+      "runtime": 100,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "New American Cinema"
+      ]
+    },
+    "edie-arnold-is-a-loser": {
+      "title": "Edie Arnold is a Loser",
+      "desc": "A New American Cinema selection competing in the New American Cinema Competition.",
+      "credits": "",
+      "runtime": 87,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "New American Cinema",
+        "New American Cinema Competition"
+      ]
+    },
+    "hot-water": {
+      "title": "Hot Water",
+      "desc": "A New American Cinema selection competing in the New American Cinema Competition.",
+      "credits": "",
+      "runtime": 97,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "New American Cinema",
+        "New American Cinema Competition"
+      ]
+    },
+    "if-i-go-will-they-miss-me": {
+      "title": "If I Go Will They Miss Me",
+      "desc": "A New American Cinema selection.",
+      "credits": "",
+      "runtime": 92,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "New American Cinema"
+      ]
+    },
+    "lucky-lu": {
+      "title": "Lucky Lu",
+      "desc": "A New American Cinema selection competing in the New American Cinema Competition.",
+      "credits": "",
+      "runtime": 103,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "New American Cinema",
+        "New American Cinema Competition"
+      ]
+    },
+    "again-again": {
+      "title": "Again Again",
+      "desc": "Aberdeen-raised director Mia Moore's debut film, executive produced by Lilly Wachowski, is a heady, romantic sci-fi starring a trans woman who enters a new day after ten years stuck in 'the loop.'",
+      "credits": "d: Mia Moore, Heather Ballish",
+      "runtime": 99,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "Northwest Connections"
+      ],
+      "premiere": "World Premiere"
+    },
+    "assets-liabilities": {
+      "title": "Assets & Liabilities",
+      "desc": "Tacoma-based director Zach Weintraub's fictional counterpart\u2014also named Zach\u2014is a burnt-out suburban dad who is taken on a wild supernatural odyssey when he meets a skater kid at the park who reminds him of his younger, more idealistic self.",
+      "credits": "d: Zach Weintraub",
+      "runtime": 62,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "Northwest Connections"
+      ]
+    },
+    "radioheart": {
+      "title": "RADIOHEART: The Drive and Times of DJ Kevin Cole",
+      "desc": "Over 25 years at KEXP, DJ Kevin Cole shaped what Seattle listens to and how we listen. RADIOHEART, a bio-doc about his life, features a killer soundtrack, archival footage, and cameos from Seattle music legends.",
+      "credits": "d: Peter Hilgendorf, Andrew Franks",
+      "runtime": 83,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "Northwest Connections",
+        "Documentary"
+      ]
+    },
+    "the-life-we-leave": {
+      "title": "The Life We Leave",
+      "desc": "An ambitious entrepreneur and two funeral directors pioneer a groundbreaking eco-friendly deathcare facility in Washington state, challenging traditional burial practices and transforming end-of-life rituals.",
+      "credits": "d: JJ Gerber",
+      "runtime": 87,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "Northwest Connections",
+        "Documentary"
+      ]
+    },
+    "phoenix-jones": {
+      "title": "Phoenix Jones: The Rise and Fall of a Superhero",
+      "desc": "Real-life superhero or untrained vigilante? This documentary revisits the Phoenix Jones saga, a fascinating chapter in Seattle history, with never-before-seen footage and interviews with his family, co-superheroes, and enemies.",
+      "credits": "d: Bayan Joonam",
+      "runtime": 116,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "Northwest Connections",
+        "Documentary"
+      ]
+    },
+    "sound-visions": {
+      "title": "Sound Visions",
+      "desc": "Short film package celebrating the Pacific Northwest's music scene.",
+      "credits": "Short Film Package",
+      "runtime": 100,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "Northwest Connections",
+        "Shorts"
+      ]
+    },
+    "under-a-million-stars": {
+      "title": "Under a Million Stars",
+      "desc": "Experts and homeless neighbors alike bust myths about Seattle's homelessness crisis in a deeply reported, humanistic dispatch from the front lines.",
+      "credits": "d: Chezik Tsunoda",
+      "runtime": 77,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "Northwest Connections",
+        "Documentary"
+      ],
+      "premiere": "World Premiere"
+    },
+    "100-sunset": {
+      "title": "100 Sunset",
+      "desc": "An introverted teen in a Tibetan diaspora section of Toronto bonds with a mysterious, like-minded woman who just moved in, leading to a slow-building conflict over money and missing objects within the insular community.",
+      "credits": "d: Kunsang Kyirong Tenzin",
+      "runtime": 99,
+      "country": "Canada",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "amrum": {
+      "title": "Amrum",
+      "desc": "Twelve-year-old Nanning learns of his parents' hideous convictions and their Nazi past in this sea-shot, boy's-eye view of the upheaval on a North Sea island in the last days of World War II.",
+      "credits": "d: Fatih Akin",
+      "runtime": 93,
+      "country": "Germany",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "balandrau": {
+      "title": "Balandrau, Where the Fierce Wind Blew",
+      "desc": "On December 30, 2000, friends climbing Mount Balandrau get caught in a sudden blizzard. Visibility vanishes, winds roar, and survival becomes a fight against the mountain's deadliest storms.",
+      "credits": "d: Fernando Trullols",
+      "runtime": 116,
+      "country": "Spain",
+      "year": 2026,
+      "categories": [
+        "World Cinema",
+        "Ibero-American Competition"
+      ],
+      "premiere": "North American Premiere"
+    },
+    "body-blow": {
+      "title": "Body Blow",
+      "desc": "Danger and desire go hand-in-hand as a musclebound young cop goes undercover in Sydney's gay scene, only to fall for an alluring twink fatale, in Dean Francis' explicit and campy neo-noir that refracts the erotic thriller through an unapologetically queer lens.",
+      "credits": "d: Dean Francis",
+      "runtime": 99,
+      "country": "Australia / USA",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "case-137": {
+      "title": "Case 137",
+      "desc": "When a 20-year-old protester is shot in the head by the police, wholly unprovoked, during demonstrations in Paris, it's up to St\u00e9phanie, a dedicated officer in the internal affairs unit, to deliver justice.",
+      "credits": "d: Dominik Moll",
+      "runtime": 116,
+      "country": "France",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "cotton-queen": {
+      "title": "Cotton Queen",
+      "desc": "In a Sudanese cotton village where the matriarch is rumored to have killed a British general, teenage Nafisa must decide what she owes her grandmother's legacy and what she's willing to burn down to claim her own.",
+      "credits": "d: Suzannah Mirghani",
+      "runtime": 94,
+      "country": "Germany / France / Palestine / Egypt / Qatar / Saudi Arabia / Sudan",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "New Directors Competition"
+      ]
+    },
+    "deadline": {
+      "title": "Deadline",
+      "desc": "In Kiwi Chao's drama-thriller, an elite academy drives students to pills, rebellion, and a suicide ultimatum\u2014exposing an authority-soaked system through stunning visuals and standout young performances.",
+      "credits": "d: Kiwi Chow",
+      "runtime": 118,
+      "country": "Taiwan / Hong Kong / UK",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ],
+      "premiere": "North American Premiere"
+    },
+    "franz": {
+      "title": "Franz",
+      "desc": "How do you make sense of Franz Kafka? With fictional interviews with Kafka's friends and family and thrilling plunges into his fiction, Franz does not explain, but playfully and inventively explores the man and his work.",
+      "credits": "d: Agnieszka Holland",
+      "runtime": 127,
+      "country": "Czech Republic / Poland / Germany / France / Turkey",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "happy-birthday": {
+      "title": "Happy Birthday",
+      "desc": "Eight-year-old Toha has big plans; she wants to throw her friend Nelly a birthday party. But the differences between them will make this a challenge in ways she may not fully understand.",
+      "credits": "d: Sarah Goher",
+      "runtime": 92,
+      "country": "Egypt",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "New Directors Competition"
+      ]
+    },
+    "hen": {
+      "title": "Hen",
+      "desc": "A runaway hen finds refuge in a crumbling Greek taverna and bears witness to a human-smuggling operation. Hen proves motherhood looks the same across species. If you think this is a goofy movie about a chicken, you couldn't be more wrong.",
+      "credits": "d: Gy\u00f6rgy P\u00e1lfi",
+      "runtime": 96,
+      "country": "Germany / Greece / Hungary",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "hijra": {
+      "title": "Hijra",
+      "desc": "Sitti is on a pilgrimage to Mecca with her two rebellious granddaughters, Sarah and Janna. But everything changes when one of the granddaughters goes missing.",
+      "credits": "d: Shahad Ameen",
+      "runtime": 114,
+      "country": "Saudi Arabia / Iraq / Egypt / UK",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "New Directors Competition"
+      ]
+    },
+    "it-would-be-night-in-caracas": {
+      "title": "It Would Be Night in Caracas",
+      "desc": "Set in Caracas during the 2017 protests, this gripping thriller follows a woman trapped in a city consumed by repression and chaos. When loyalists seize her apartment, she goes into hiding and begins a desperate plan to escape.",
+      "credits": "d: Mariana Rond\u00f3n, Marit\u00e9 Ug\u00e1s",
+      "runtime": 97,
+      "country": "Mexico / Venezuela",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "Ibero-American Competition"
+      ]
+    },
+    "maspalomas": {
+      "title": "Maspalomas",
+      "desc": "After a stroke while vacationing in Maspalomas, Vicente\u2014played by 2026 Goya Award winner Jos\u00e9 Ram\u00f3n Soroiz\u2014is placed in a nursing home where he's forced back into the closet, confronting a fight for freedom he thought he'd already won.",
+      "credits": "d: Aitor Arregi, Jose Mari Goenaga",
+      "runtime": 115,
+      "country": "Spain",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "murder-in-the-building": {
+      "title": "Murder in the Building",
+      "desc": "A crime writer and his film professor partner become caught up in a real-life mystery of their own when they witness a crime in the apartment across the courtyard of their Paris apartment building.",
+      "credits": "d: R\u00e9mi Bezan\u00e7on",
+      "runtime": 104,
+      "country": "France",
+      "year": 2026,
+      "categories": [
+        "World Cinema"
+      ],
+      "premiere": "North American Premiere"
+    },
+    "primavera": {
+      "title": "Primavera",
+      "desc": "Inspired by Antonio Vivaldi's nearly three decades at the Ospedale della Piet\u00e0, where orphaned girls performed from behind screens and convent walls, this dramatic story follows Cecilia\u2014a gifted young virtuoso who refused to be silenced.",
+      "credits": "d: Damiano Michieletto",
+      "runtime": 110,
+      "country": "Italy / France",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "renoir": {
+      "title": "Renoir",
+      "desc": "A coming-of-age story following a tomboyish 11-year-old girl whose intellectual father is dying of cancer and mother at her wits' end. The courageous girl seeks adventures, some involving the paranormal.",
+      "credits": "d: Chie Hayakawa",
+      "runtime": 118,
+      "country": "Japan / France / Singapore / Philippines / Indonesia / Qatar / USA",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "shape-of-momo": {
+      "title": "Shape of Momo",
+      "desc": "After quitting her job in Delhi, Bishnu returns to her Himalayan village, only to find the women around her still bound by the same expectations. Change, it turns out, is harder than she thought.",
+      "credits": "d: Tribeny Rai",
+      "runtime": 115,
+      "country": "India / South Korea",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "New Directors Competition"
+      ]
+    },
+    "silent-friend": {
+      "title": "Silent Friend",
+      "desc": "Award-winning director Ildik\u00f3 Enyedi delivers another mesmerizing visual tale, set across three time periods at a historic German university, united by a gingko tree.",
+      "credits": "d: Ildik\u00f3 Enyedi",
+      "runtime": 146,
+      "country": "Germany / Hungary",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "Official Competition"
+      ]
+    },
+    "sons-of-the-neon-night": {
+      "title": "Sons of the Neon Night",
+      "desc": "An elite cast of Hong Kong action legends assemble for this sprawling, mega-budget thriller that hearkens back to the wildly ambitious, hyper-stylized crime cinema that put Hong Kong filmmaking on the international map.",
+      "credits": "d: Juno Mak",
+      "runtime": 124,
+      "country": "Hong Kong / China",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "sundays": {
+      "title": "Sundays",
+      "desc": "At 17, Ainara faces a life-changing choice: after high school, she considers becoming a nun. Her decision unsettles her family, especially her aunt, who fears it means losing freedom. This Goya Award standout explores the fragile balance between faith and skepticism.",
+      "credits": "d: Alauda Ruiz de Az\u00faa",
+      "runtime": 117,
+      "country": "Spain",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "Official Competition"
+      ]
+    },
+    "three-goodbyes": {
+      "title": "Three Goodbyes",
+      "desc": "After years together, Marta and Antonio are undone by an argument that should have amounted to nothing. When Marta's loss of appetite turns out to be about more than heartbreak, everything she thought she knew about her life comes into question.",
+      "credits": "d: Isabel Coixet",
+      "runtime": 124,
+      "country": "Italy / Spain",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "another-world": {
+      "title": "Another World",
+      "desc": "Asian Crossroads selection.",
+      "credits": "",
+      "runtime": 111,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "becoming-human": {
+      "title": "Becoming Human",
+      "desc": "Asian Crossroads selection; New Directors Competition.",
+      "credits": "",
+      "runtime": 99,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "New Directors Competition"
+      ]
+    },
+    "burn": {
+      "title": "Burn",
+      "desc": "Asian Crossroads selection; Official Competition.",
+      "credits": "",
+      "runtime": 103,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "Official Competition"
+      ]
+    },
+    "en-route-to": {
+      "title": "En Route To",
+      "desc": "Asian Crossroads selection.",
+      "credits": "",
+      "runtime": 105,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "roid": {
+      "title": "Roid",
+      "desc": "Asian Crossroads selection.",
+      "credits": "",
+      "runtime": 109,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "trial-of-hein": {
+      "title": "Trial of Hein",
+      "desc": "European selection; New Directors Competition.",
+      "credits": "",
+      "runtime": 122,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "New Directors Competition"
+      ]
+    },
+    "lady": {
+      "title": "Lady",
+      "desc": "European selection; Official Competition.",
+      "credits": "",
+      "runtime": 95,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "Official Competition"
+      ]
+    },
+    "tell-everyone": {
+      "title": "Tell Everyone",
+      "desc": "European selection.",
+      "credits": "",
+      "runtime": 112,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "three-of-a-kind": {
+      "title": "Three of a Kind",
+      "desc": "European selection; New Directors Competition.",
+      "credits": "",
+      "runtime": 98,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "New Directors Competition"
+      ]
+    },
+    "the-friends-house-is-here": {
+      "title": "The Friend's House is Here",
+      "desc": "Middle East selection; Official Competition.",
+      "credits": "",
+      "runtime": 95,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "Official Competition"
+      ]
+    },
+    "hold-onto-me": {
+      "title": "Hold Onto Me",
+      "desc": "Middle East selection.",
+      "credits": "",
+      "runtime": 102,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "salvation": {
+      "title": "Salvation",
+      "desc": "Middle East selection.",
+      "credits": "",
+      "runtime": 120,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "black-burns-fast": {
+      "title": "Black Burns Fast",
+      "desc": "African Pictures selection.",
+      "credits": "",
+      "runtime": 96,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "promised-sky": {
+      "title": "Promised Sky",
+      "desc": "African Pictures selection.",
+      "credits": "",
+      "runtime": 95,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "the-condor-daughter": {
+      "title": "The Condor Daughter",
+      "desc": "Ibero-American selection.",
+      "credits": "",
+      "runtime": 109,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "Ibero-American Competition"
+      ]
+    },
+    "the-garden-we-dreamed": {
+      "title": "The Garden We Dreamed",
+      "desc": "Ibero-American selection.",
+      "credits": "",
+      "runtime": 100,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "Ibero-American Competition"
+      ]
+    },
+    "ivan-hadoum": {
+      "title": "Iv\u00e1n & Hadoum",
+      "desc": "Ibero-American selection; Ibero-American Competition.",
+      "credits": "",
+      "runtime": 103,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "Ibero-American Competition"
+      ]
+    },
+    "the-red-hangar": {
+      "title": "The Red Hangar",
+      "desc": "Ibero-American selection; Ibero-American Competition.",
+      "credits": "",
+      "runtime": 81,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema",
+        "Ibero-American Competition"
+      ]
+    },
+    "strange-river": {
+      "title": "Strange River",
+      "desc": "Ibero-American selection.",
+      "credits": "",
+      "runtime": 106,
+      "country": "",
+      "year": 2025,
+      "categories": [
+        "World Cinema"
+      ]
+    },
+    "the-best-summer": {
+      "title": "The Best Summer",
+      "desc": "A found-footage documentary from a 1995 concert tour featuring live performances, candid interviews, and a behind-the-scenes look at life on tour with Beastie Boys, Sonic Youth, Foo Fighters, Beck, Pavement, Rancid, The Amps, and Bikini Kill.",
+      "credits": "d: Tamra Davis",
+      "runtime": 84,
+      "country": "USA / Australia / Indonesia / Philippines / Thailand",
+      "year": 2026,
+      "categories": [
+        "Documentary",
+        "Face the Music"
+      ]
+    },
+    "the-big-cheese": {
+      "title": "The Big Cheese",
+      "desc": "Adam 'Mr. Moo' Moskowitz is on a mission to make the world take American cheesemongers seriously. For over a decade, he's led a team of eccentric misfits to the Olympics of Cheese, where Team USA has never won. Could this be their year?",
+      "credits": "d: Sara Joe Wolansky",
+      "runtime": 88,
+      "country": "USA / France / Sweden",
+      "year": 2025,
+      "categories": [
+        "Documentary",
+        "Culinary Cinema"
+      ]
+    },
+    "birds-of-war": {
+      "title": "Birds of War",
+      "desc": "Lebanese journalist Janay Boulos and Syrian activist and cameraman Abd Alkader Habak share their extraordinary love story, told through 13 years of personal archives spanning revolutions, war, and exile.",
+      "credits": "d: Janay Boulos, Abd Alkader Habak",
+      "runtime": 85,
+      "country": "UK / Syria / Lebanon",
+      "year": 2026,
+      "categories": [
+        "Documentary",
+        "Documentary Competition"
+      ]
+    },
+    "jaripeo": {
+      "title": "Jaripeo",
+      "desc": "Set amid Michoac\u00e1n's electrifying bull-riding celebrations, Jaripeo uncovers queer desire within a fiercely hypermasculine world\u2014blending music, dance, and intimate stories into a vibrant celebration of sensuality, joy, and living openly.",
+      "credits": "d: Efra\u00edn Mojica, Rebecca Zweig",
+      "runtime": 71,
+      "country": "Mexico / USA / France",
+      "year": 2026,
+      "categories": [
+        "Documentary",
+        "Ibero-American Competition"
+      ]
+    },
+    "kikuyu-land": {
+      "title": "Kikuyu Land",
+      "desc": "What begins as a seemingly straightforward investigation into land restitution in Kenya leads to a web of exploitation, family secrets, and death threats in this riveting political documentary.",
+      "credits": "d: Andrew H. Brown (Huron-Wyandot), Bea Wangondu (Kikuyu)",
+      "runtime": 93,
+      "country": "Kenya / USA",
+      "year": 2026,
+      "categories": [
+        "Documentary",
+        "Documentary Competition"
+      ]
+    },
+    "nuisance-bear": {
+      "title": "Nuisance Bear",
+      "desc": "A polar bear is forced to navigate a human world of tourists, wildlife officers, and hunters as its migration collides with modern life. When a sacred predator is branded a nuisance, it becomes unclear who truly belongs in this shared landscape.",
+      "credits": "d: Gabriela Osio Vanden, Jack Weisman",
+      "runtime": 90,
+      "country": "USA / Canada / UK",
+      "year": 2026,
+      "categories": [
+        "Documentary",
+        "Documentary Competition"
+      ]
+    },
+    "the-seoul-guardians": {
+      "title": "The Seoul Guardians",
+      "desc": "On the night of December 3, 2024, South Korea pushed back against its own president. The Seoul Guardians puts you on the streets and inside the National Assembly chamber as it happened.",
+      "credits": "d: Jong-woo Kim, Shin-Wan Kim, Chul-Young Cho",
+      "runtime": 71,
+      "country": "South Korea",
+      "year": 2026,
+      "categories": [
+        "Documentary",
+        "Documentary Competition"
+      ],
+      "premiere": "US Premiere"
+    },
+    "broken-english": {
+      "title": "Broken English",
+      "desc": "Face the Music documentary.",
+      "credits": "",
+      "runtime": 99,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary",
+        "Face the Music"
+      ]
+    },
+    "american-doctor": {
+      "title": "American Doctor",
+      "desc": "Documentary Competition selection.",
+      "credits": "",
+      "runtime": 93,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary",
+        "Documentary Competition"
+      ]
+    },
+    "the-ascent": {
+      "title": "The Ascent",
+      "desc": "Documentary selection.",
+      "credits": "",
+      "runtime": 102,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary"
+      ]
+    },
+    "barbara-forever": {
+      "title": "Barbara Forever",
+      "desc": "Documentary selection.",
+      "credits": "",
+      "runtime": 102,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary"
+      ]
+    },
+    "beat-the-lotto": {
+      "title": "Beat the Lotto",
+      "desc": "Documentary selection.",
+      "credits": "",
+      "runtime": 89,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary"
+      ]
+    },
+    "boorman-and-the-devil": {
+      "title": "Boorman and the Devil",
+      "desc": "Documentary selection.",
+      "credits": "",
+      "runtime": 112,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary"
+      ]
+    },
+    "bucks-harbor": {
+      "title": "Bucks Harbor",
+      "desc": "Documentary Competition selection.",
+      "credits": "",
+      "runtime": 98,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary",
+        "Documentary Competition"
+      ]
+    },
+    "cuba-alaska": {
+      "title": "Cuba & Alaska",
+      "desc": "Documentary selection.",
+      "credits": "",
+      "runtime": 93,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary"
+      ]
+    },
+    "ghost-in-the-machine": {
+      "title": "Ghost in the Machine",
+      "desc": "Documentary selection.",
+      "credits": "",
+      "runtime": 110,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary"
+      ]
+    },
+    "hanging-by-a-wire": {
+      "title": "Hanging by a Wire",
+      "desc": "Documentary selection.",
+      "credits": "",
+      "runtime": 77,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary"
+      ]
+    },
+    "love-chaos-kin": {
+      "title": "Love Chaos Kin",
+      "desc": "Documentary selection.",
+      "credits": "",
+      "runtime": 98,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary"
+      ]
+    },
+    "maintenance-artist": {
+      "title": "Maintenance Artist",
+      "desc": "Documentary selection.",
+      "credits": "",
+      "runtime": 95,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary"
+      ]
+    },
+    "rising-through-the-fray": {
+      "title": "Rising Through the Fray",
+      "desc": "Documentary selection.",
+      "credits": "",
+      "runtime": 88,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary"
+      ]
+    },
+    "reality-check": {
+      "title": "Reality Check",
+      "desc": "Short Film Package.",
+      "credits": "",
+      "runtime": 93,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary",
+        "Shorts"
+      ]
+    },
+    "soul-patrol": {
+      "title": "Soul Patrol",
+      "desc": "Documentary selection.",
+      "credits": "",
+      "runtime": 98,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary"
+      ]
+    },
+    "to-hold-a-mountain": {
+      "title": "To Hold a Mountain",
+      "desc": "Documentary Competition selection.",
+      "credits": "",
+      "runtime": 105,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary",
+        "Documentary Competition"
+      ]
+    },
+    "when-a-witness-recants": {
+      "title": "When a Witness Recants",
+      "desc": "Documentary selection.",
+      "credits": "",
+      "runtime": 117,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary"
+      ]
+    },
+    "yo": {
+      "title": "Yo (Love is a Rebellious Bird)",
+      "desc": "Documentary Competition selection.",
+      "credits": "",
+      "runtime": 78,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary",
+        "Documentary Competition"
+      ]
+    },
+    "one-of-our-own": {
+      "title": "One of Our Own: A Tribute to Joan Roca",
+      "desc": "Culinary Cinema selection.",
+      "credits": "",
+      "runtime": 70,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Documentary",
+        "Culinary Cinema"
+      ]
+    },
+    "fifteen": {
+      "title": "Fifteen",
+      "desc": "Growing up is terrifying enough, but for two best friends planning the ultimate quincea\u00f1era, the real horror is what's growing inside one of them.",
+      "credits": "d: Jack Zagha, Yossy Zagha",
+      "runtime": 99,
+      "country": "Mexico / Argentina",
+      "year": 2026,
+      "categories": [
+        "WTF",
+        "Ibero-American Competition"
+      ]
+    },
+    "the-furious": {
+      "title": "The Furious",
+      "desc": "After the daughter of Wang Wei (Xie Miao) is kidnapped by a criminal network and he receives no help from the corrupt police, Wei sets out on a rampage to find her in this explosive martial arts showdown.",
+      "credits": "d: Kenji Tanigaki",
+      "runtime": 113,
+      "country": "Hong Kong / China",
+      "year": 2025,
+      "categories": [
+        "WTF"
+      ]
+    },
+    "grayson-manor": {
+      "title": "The Restoration at Grayson Manor",
+      "desc": "When a spoiled Irish playboy loses his hands, his controlling mother replaces them with mechanical ones \u2014 operated entirely by his murderous subconscious.",
+      "credits": "d: Glenn McQuaid",
+      "runtime": 90,
+      "country": "Ireland",
+      "year": 2025,
+      "categories": [
+        "WTF"
+      ]
+    },
+    "camp": {
+      "title": "Camp",
+      "desc": "WTF selection.",
+      "credits": "",
+      "runtime": 111,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "WTF"
+      ]
+    },
+    "gaua": {
+      "title": "Gaua",
+      "desc": "WTF selection.",
+      "credits": "",
+      "runtime": 96,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "WTF"
+      ]
+    },
+    "wtf-nightmare-fuel": {
+      "title": "WTF! Nightmare Fuel",
+      "desc": "Short Film Package.",
+      "credits": "",
+      "runtime": 95,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "WTF",
+        "Shorts"
+      ]
+    },
+    "marama": {
+      "title": "M\u0101rama",
+      "desc": "M\u0101rama, Taratoa Stappard's feature debut, is an anti-colonial horror story confronting oppression while honoring the strength and resilience of M\u0101ori women.",
+      "credits": "d: Taratoa Stappard (M\u0101ori)",
+      "runtime": 83,
+      "country": "New Zealand",
+      "year": 2025,
+      "categories": [
+        "cINeDIGENOUS",
+        "Official Competition"
+      ]
+    },
+    "powwow-people": {
+      "title": "Powwow People",
+      "desc": "Powwow People immerses us in a single day at a powwow, guided by Reuben Little Head's humor and heart, culminating in a long take honoring community as privilege.",
+      "credits": "d: Sky Hopinka (Ho-Chunk Nation/Pechanga Band of Luise\u00f1o Indians)",
+      "runtime": 88,
+      "country": "USA",
+      "year": 2025,
+      "categories": [
+        "cINeDIGENOUS"
+      ]
+    },
+    "teachings-of-the-elders": {
+      "title": "Teachings of the Elders",
+      "desc": "Indigenous Elders share teachings through story, land, and memory, guiding future generations with wisdom rooted in perseverance, relationship, and enduring cultural knowledge across communities.",
+      "credits": "Short Film Package",
+      "runtime": 70,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "cINeDIGENOUS",
+        "Shorts"
+      ]
+    },
+    "crystal-cross": {
+      "title": "Crystal Cross",
+      "desc": "cINeDIGENOUS selection; New American Cinema Competition.",
+      "credits": "",
+      "runtime": 88,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "cINeDIGENOUS",
+        "New American Cinema Competition"
+      ]
+    },
+    "meadowlarks": {
+      "title": "Meadowlarks",
+      "desc": "cINeDIGENOUS selection.",
+      "credits": "",
+      "runtime": 102,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "cINeDIGENOUS"
+      ]
+    },
+    "aanikoobijigan": {
+      "title": "Aanikoobijigan [ancestor/great-grandparent/great-grandchild]",
+      "desc": "cINeDIGENOUS selection.",
+      "credits": "",
+      "runtime": 93,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "cINeDIGENOUS"
+      ]
+    },
+    "reservation-redemption": {
+      "title": "Reservation Redemption",
+      "desc": "Free screening at Seattle Central Library.",
+      "credits": "",
+      "runtime": 61,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "cINeDIGENOUS",
+        "Free Screening"
+      ]
+    },
+    "cookie-queens": {
+      "title": "Cookie Queens",
+      "desc": "This charming SXSW Film & TV Festival Audience Award-winning documentary profiles four resolute girls through Girl Scout Cookie season as they find their place in the $800 million phenomenon.",
+      "credits": "d: Alysa Nahmias",
+      "runtime": 91,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "Films4Families",
+        "Documentary"
+      ]
+    },
+    "the-family-picture-show": {
+      "title": "The Family Picture Show",
+      "desc": "Short Film Package for families.",
+      "credits": "",
+      "runtime": 82,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Films4Families",
+        "Shorts"
+      ]
+    },
+    "songbirds-secret": {
+      "title": "The Songbirds' Secret",
+      "desc": "Films4Families selection.",
+      "credits": "",
+      "runtime": 83,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Films4Families"
+      ]
+    },
+    "queen-kelly": {
+      "title": "Queen Kelly",
+      "desc": "In this restoration of the silent epic melodrama, Patricia Kelly (Gloria Swanson), a flirtatious girl, captures the eye of Prince Wolfram. Using Erich von Stroheim's shooting script, this version incorporates previously unseen material to recreate the film's original d\u00e9nouement.",
+      "credits": "d: Erich von Stroheim \u00b7 c: Gloria Swanson",
+      "runtime": 105,
+      "country": "USA",
+      "year": 1929,
+      "categories": [
+        "Archival"
+      ]
+    },
+    "prisoners-of-the-earth": {
+      "title": "Prisoners of the Earth",
+      "desc": "Archival film \u2014 restored classic.",
+      "credits": "",
+      "runtime": 86,
+      "country": "",
+      "year": 1939,
+      "categories": [
+        "Archival"
+      ]
+    },
+    "eight-bridges": {
+      "title": "EIGHT BRIDGES",
+      "desc": "There is something hypnotically alluring about James Benning's work. With only eight shots, each of a different bridge, it's like taking more than a cursory look at a gallery painting: the longer you look, the deeper you see.",
+      "credits": "d: James Benning",
+      "runtime": 82,
+      "country": "USA",
+      "year": 2026,
+      "categories": [
+        "Alternate Cinema"
+      ]
+    },
+    "alt-shorts": {
+      "title": "Alt Shorts",
+      "desc": "Short Film Package \u2014 experimental.",
+      "credits": "",
+      "runtime": 81,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Alternate Cinema",
+        "Shorts"
+      ]
+    },
+    "shortsfest-opening-night": {
+      "title": "ShortsFest Opening Night",
+      "desc": "Open ShortsFest with a standout collection of films from around the world. Spanning narrative and documentary, live action and animation, these films prove shorts are truly sweet.",
+      "credits": "Short Film Package",
+      "runtime": 93,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Shorts"
+      ]
+    },
+    "animation4adults": {
+      "title": "Animation4Adults",
+      "desc": "Short Film Package.",
+      "credits": "",
+      "runtime": 92,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Shorts"
+      ]
+    },
+    "best-of-nffty": {
+      "title": "Best of NFFTY 2026",
+      "desc": "Short Film Package \u2014 National Film Festival for Talented Youth.",
+      "credits": "",
+      "runtime": 78,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Shorts"
+      ]
+    },
+    "brave-new-world": {
+      "title": "Brave New World",
+      "desc": "Short Film Package.",
+      "credits": "",
+      "runtime": 89,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Shorts"
+      ]
+    },
+    "spacing-out": {
+      "title": "Spacing OUT",
+      "desc": "Short Film Package.",
+      "credits": "",
+      "runtime": 101,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Shorts"
+      ]
+    },
+    "secret-1": {
+      "title": "Secret Fest #1",
+      "desc": "Go in blind. Come out buzzing. Screenings might be rare archival finds, unofficial debuts, or anything in between! Special event pricing.",
+      "credits": "",
+      "runtime": 105,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Secret Fest",
+        "Special Event"
+      ]
+    },
+    "secret-2": {
+      "title": "Secret Fest #2",
+      "desc": "Go in blind. Come out buzzing. Screenings might be rare archival finds, unofficial debuts, or anything in between! Special event pricing.",
+      "credits": "",
+      "runtime": 86,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "Secret Fest",
+        "Special Event"
+      ]
+    },
+    "tba-sat-5-9": {
+      "title": "TBA (Sat 5/9)",
+      "desc": "To be announced.",
+      "credits": "",
+      "runtime": 120,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "TBA"
+      ]
+    },
+    "tba-sun-5-10": {
+      "title": "TBA (Sun 5/10)",
+      "desc": "To be announced.",
+      "credits": "",
+      "runtime": 120,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "TBA"
+      ]
+    },
+    "tba-sat-5-16-pacsci-1": {
+      "title": "TBA (Sat 5/16 PacSci)",
+      "desc": "To be announced.",
+      "credits": "",
+      "runtime": 120,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "TBA"
+      ]
+    },
+    "tba-sun-5-17-pacsci-1": {
+      "title": "TBA (Sun 5/17 PacSci 5pm)",
+      "desc": "To be announced.",
+      "credits": "",
+      "runtime": 120,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "TBA"
+      ]
+    },
+    "tba-sun-5-17-pacsci-2": {
+      "title": "TBA (Sun 5/17 PacSci 8pm)",
+      "desc": "To be announced.",
+      "credits": "",
+      "runtime": 120,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "TBA"
+      ]
+    },
+    "tba-sun-5-17-uptown": {
+      "title": "TBA (Sun 5/17 Uptown)",
+      "desc": "To be announced.",
+      "credits": "",
+      "runtime": 120,
+      "country": "",
+      "year": 2026,
+      "categories": [
+        "TBA"
+      ]
+    },
+    "tba-sun-5-17-fc-1": {
+      "title": "Tba Sun 5 17 Fc 1",
+      "runtime": 100,
+      "desc": "See siff.net for details.",
+      "credits": "",
+      "country": "",
+      "year": 2026,
+      "categories": []
+    },
+    "tba-wed-5-13-uptown": {
+      "title": "Tba Wed 5 13 Uptown",
+      "runtime": 100,
+      "desc": "See siff.net for details.",
+      "credits": "",
+      "country": "",
+      "year": 2026,
+      "categories": []
+    },
+    "tba-sun-5-17-fc-2": {
+      "title": "Tba Sun 5 17 Fc 2",
+      "runtime": 100,
+      "desc": "See siff.net for details.",
+      "credits": "",
+      "country": "",
+      "year": 2026,
+      "categories": []
+    }
+  },
+  "screenings_by_day": {
+    "2026-05-07": [
+      {
+        "slug": "i-love-boosters",
+        "time": "19:00",
+        "venue": "paramount",
+        "runtime": 115
+      }
+    ],
+    "2026-05-08": [
+      {
+        "slug": "case-137",
+        "time": "12:30",
+        "venue": "downtown",
+        "runtime": 116
+      },
+      {
+        "slug": "to-hold-a-mountain",
+        "time": "12:30",
+        "venue": "uptown",
+        "runtime": 105
+      },
+      {
+        "slug": "promised-sky",
+        "time": "13:00",
+        "venue": "uptown",
+        "runtime": 95
+      },
+      {
+        "slug": "tell-everyone",
+        "time": "13:15",
+        "venue": "uptown",
+        "runtime": 112
+      },
+      {
+        "slug": "renoir",
+        "time": "15:00",
+        "venue": "uptown",
+        "runtime": 118
+      },
+      {
+        "slug": "franz",
+        "time": "15:30",
+        "venue": "downtown",
+        "runtime": 127
+      },
+      {
+        "slug": "barbara-forever",
+        "time": "15:30",
+        "venue": "filmcenter",
+        "runtime": 102
+      },
+      {
+        "slug": "drunken-noodles",
+        "time": "15:30",
+        "venue": "uptown",
+        "runtime": 81
+      },
+      {
+        "slug": "deadline",
+        "time": "16:00",
+        "venue": "uptown",
+        "runtime": 118
+      },
+      {
+        "slug": "shape-of-momo",
+        "time": "18:00",
+        "venue": "filmcenter",
+        "runtime": 115
+      },
+      {
+        "slug": "nuisance-bear",
+        "time": "18:00",
+        "venue": "pacsci",
+        "runtime": 87
+      },
+      {
+        "slug": "birds-of-war",
+        "time": "18:00",
+        "venue": "uptown",
+        "runtime": 85
+      },
+      {
+        "slug": "edie-arnold-is-a-loser",
+        "time": "18:30",
+        "venue": "uptown",
+        "runtime": 87
+      },
+      {
+        "slug": "power-ballad",
+        "time": "18:45",
+        "venue": "downtown",
+        "runtime": 98
+      },
+      {
+        "slug": "shortsfest-opening-night",
+        "time": "19:00",
+        "venue": "uptown",
+        "runtime": 93
+      },
+      {
+        "slug": "cotton-queen",
+        "time": "20:30",
+        "venue": "filmcenter",
+        "runtime": 94
+      },
+      {
+        "slug": "april-x",
+        "time": "20:30",
+        "venue": "pacsci",
+        "runtime": 93
+      },
+      {
+        "slug": "the-friends-house-is-here",
+        "time": "20:30",
+        "venue": "uptown",
+        "runtime": 95
+      },
+      {
+        "slug": "hot-water",
+        "time": "21:00",
+        "venue": "uptown",
+        "runtime": 97
+      },
+      {
+        "slug": "marama",
+        "time": "21:15",
+        "venue": "downtown",
+        "runtime": 103
+      },
+      {
+        "slug": "broken-english",
+        "time": "21:30",
+        "venue": "uptown",
+        "runtime": 99
+      },
+      {
+        "slug": "obsession",
+        "time": "23:59",
+        "venue": "downtown",
+        "runtime": 109
+      }
+    ],
+    "2026-05-09": [
+      {
+        "slug": "hot-water",
+        "time": "11:45",
+        "venue": "uptown",
+        "runtime": 97
+      },
+      {
+        "slug": "songbirds-secret",
+        "time": "12:00",
+        "venue": "pacsci",
+        "runtime": 83
+      },
+      {
+        "slug": "birds-of-war",
+        "time": "12:15",
+        "venue": "uptown",
+        "runtime": 85
+      },
+      {
+        "slug": "nuisance-bear",
+        "time": "12:30",
+        "venue": "downtown",
+        "runtime": 87
+      },
+      {
+        "slug": "edie-arnold-is-a-loser",
+        "time": "12:45",
+        "venue": "uptown",
+        "runtime": 87
+      },
+      {
+        "slug": "best-of-nffty",
+        "time": "13:00",
+        "venue": "filmcenter",
+        "runtime": 80
+      },
+      {
+        "slug": "reservation-redemption",
+        "time": "13:00",
+        "venue": "library",
+        "runtime": 90
+      },
+      {
+        "slug": "the-friends-house-is-here",
+        "time": "14:15",
+        "venue": "uptown",
+        "runtime": 95
+      },
+      {
+        "slug": "the-ascent",
+        "time": "14:30",
+        "venue": "pacsci",
+        "runtime": 102
+      },
+      {
+        "slug": "marama",
+        "time": "15:15",
+        "venue": "uptown",
+        "runtime": 103
+      },
+      {
+        "slug": "power-ballad",
+        "time": "15:30",
+        "venue": "downtown",
+        "runtime": 98
+      },
+      {
+        "slug": "cotton-queen",
+        "time": "15:30",
+        "venue": "filmcenter",
+        "runtime": 94
+      },
+      {
+        "slug": "april-x",
+        "time": "15:30",
+        "venue": "uptown",
+        "runtime": 93
+      },
+      {
+        "slug": "yo",
+        "time": "17:00",
+        "venue": "uptown",
+        "runtime": 78
+      },
+      {
+        "slug": "maintenance-artist",
+        "time": "17:30",
+        "venue": "pacsci",
+        "runtime": 95
+      },
+      {
+        "slug": "brave-new-world",
+        "time": "18:00",
+        "venue": "filmcenter",
+        "runtime": 89
+      },
+      {
+        "slug": "the-seoul-guardians",
+        "time": "18:00",
+        "venue": "uptown",
+        "runtime": 81
+      },
+      {
+        "slug": "see-you-when-i-see-you",
+        "time": "18:15",
+        "venue": "downtown",
+        "runtime": 101
+      },
+      {
+        "slug": "under-a-million-stars",
+        "time": "18:15",
+        "venue": "uptown",
+        "runtime": 89
+      },
+      {
+        "slug": "another-world",
+        "time": "20:00",
+        "venue": "pacsci",
+        "runtime": 111
+      },
+      {
+        "slug": "happy-birthday",
+        "time": "20:00",
+        "venue": "uptown",
+        "runtime": 92
+      },
+      {
+        "slug": "the-garden-we-dreamed",
+        "time": "20:30",
+        "venue": "filmcenter",
+        "runtime": 100
+      },
+      {
+        "slug": "late-fame",
+        "time": "20:30",
+        "venue": "uptown",
+        "runtime": 96
+      },
+      {
+        "slug": "wtf-nightmare-fuel",
+        "time": "21:00",
+        "venue": "uptown",
+        "runtime": 96
+      },
+      {
+        "slug": "the-best-summer",
+        "time": "21:15",
+        "venue": "downtown",
+        "runtime": 84
+      },
+      {
+        "slug": "grayson-manor",
+        "time": "23:59",
+        "venue": "downtown",
+        "runtime": 90
+      }
+    ],
+    "2026-05-10": [
+      {
+        "slug": "the-family-picture-show",
+        "time": "11:30",
+        "venue": "uptown",
+        "runtime": 82
+      },
+      {
+        "slug": "yo",
+        "time": "12:00",
+        "venue": "pacsci",
+        "runtime": 78
+      },
+      {
+        "slug": "the-seoul-guardians",
+        "time": "12:00",
+        "venue": "uptown",
+        "runtime": 81
+      },
+      {
+        "slug": "under-a-million-stars",
+        "time": "12:30",
+        "venue": "uptown",
+        "runtime": 89
+      },
+      {
+        "slug": "the-garden-we-dreamed",
+        "time": "13:00",
+        "venue": "filmcenter",
+        "runtime": 100
+      },
+      {
+        "slug": "the-best-summer",
+        "time": "14:00",
+        "venue": "uptown",
+        "runtime": 84
+      },
+      {
+        "slug": "queen-kelly",
+        "time": "14:15",
+        "venue": "downtown",
+        "runtime": 105
+      },
+      {
+        "slug": "late-fame",
+        "time": "14:30",
+        "venue": "pacsci",
+        "runtime": 96
+      },
+      {
+        "slug": "see-you-when-i-see-you",
+        "time": "14:30",
+        "venue": "uptown",
+        "runtime": 101
+      },
+      {
+        "slug": "maintenance-artist",
+        "time": "15:00",
+        "venue": "uptown",
+        "runtime": 95
+      },
+      {
+        "slug": "shape-of-momo",
+        "time": "15:30",
+        "venue": "filmcenter",
+        "runtime": 115
+      },
+      {
+        "slug": "franz",
+        "time": "17:00",
+        "venue": "downtown",
+        "runtime": 127
+      },
+      {
+        "slug": "ghost-in-the-machine",
+        "time": "17:00",
+        "venue": "pacsci",
+        "runtime": 110
+      },
+      {
+        "slug": "soul-patrol",
+        "time": "17:00",
+        "venue": "uptown",
+        "runtime": 98
+      },
+      {
+        "slug": "maspalomas",
+        "time": "17:30",
+        "venue": "uptown",
+        "runtime": 115
+      },
+      {
+        "slug": "100-sunset",
+        "time": "18:00",
+        "venue": "filmcenter",
+        "runtime": 99
+      },
+      {
+        "slug": "the-ascent",
+        "time": "18:00",
+        "venue": "uptown",
+        "runtime": 102
+      },
+      {
+        "slug": "salvation",
+        "time": "19:30",
+        "venue": "uptown",
+        "runtime": 120
+      },
+      {
+        "slug": "amrum",
+        "time": "20:00",
+        "venue": "pacsci",
+        "runtime": 93
+      },
+      {
+        "slug": "deadline",
+        "time": "20:15",
+        "venue": "uptown",
+        "runtime": 118
+      },
+      {
+        "slug": "boorman-and-the-devil",
+        "time": "20:30",
+        "venue": "downtown",
+        "runtime": 112
+      },
+      {
+        "slug": "hold-onto-me",
+        "time": "20:30",
+        "venue": "filmcenter",
+        "runtime": 102
+      },
+      {
+        "slug": "drunken-noodles",
+        "time": "20:45",
+        "venue": "uptown",
+        "runtime": 81
+      }
+    ],
+    "2026-05-11": [
+      {
+        "slug": "primavera",
+        "time": "15:00",
+        "venue": "downtown",
+        "runtime": 110
+      },
+      {
+        "slug": "grayson-manor",
+        "time": "15:00",
+        "venue": "uptown",
+        "runtime": 90
+      },
+      {
+        "slug": "ghost-in-the-machine",
+        "time": "15:15",
+        "venue": "uptown",
+        "runtime": 110
+      },
+      {
+        "slug": "soul-patrol",
+        "time": "16:00",
+        "venue": "uptown",
+        "runtime": 98
+      },
+      {
+        "slug": "american-doctor",
+        "time": "17:30",
+        "venue": "uptown",
+        "runtime": 93
+      },
+      {
+        "slug": "hen",
+        "time": "18:00",
+        "venue": "downtown",
+        "runtime": 96
+      },
+      {
+        "slug": "100-sunset",
+        "time": "18:00",
+        "venue": "filmcenter",
+        "runtime": 99
+      },
+      {
+        "slug": "songbirds-secret",
+        "time": "18:00",
+        "venue": "pacsci",
+        "runtime": 83
+      },
+      {
+        "slug": "when-a-witness-recants",
+        "time": "18:00",
+        "venue": "uptown",
+        "runtime": 117
+      },
+      {
+        "slug": "again-again",
+        "time": "18:30",
+        "venue": "uptown",
+        "runtime": 99
+      },
+      {
+        "slug": "ivan-hadoum",
+        "time": "20:00",
+        "venue": "uptown",
+        "runtime": 103
+      },
+      {
+        "slug": "camp",
+        "time": "20:30",
+        "venue": "downtown",
+        "runtime": 111
+      },
+      {
+        "slug": "lucky-lu",
+        "time": "20:30",
+        "venue": "filmcenter",
+        "runtime": 103
+      },
+      {
+        "slug": "trial-of-hein",
+        "time": "20:30",
+        "venue": "pacsci",
+        "runtime": 122
+      },
+      {
+        "slug": "case-137",
+        "time": "20:45",
+        "venue": "uptown",
+        "runtime": 116
+      },
+      {
+        "slug": "barbara-forever",
+        "time": "21:00",
+        "venue": "uptown",
+        "runtime": 102
+      }
+    ],
+    "2026-05-12": [
+      {
+        "slug": "lucky-lu",
+        "time": "12:30",
+        "venue": "uptown",
+        "runtime": 103
+      },
+      {
+        "slug": "cuba-alaska",
+        "time": "13:00",
+        "venue": "uptown",
+        "runtime": 93
+      },
+      {
+        "slug": "salvation",
+        "time": "13:15",
+        "venue": "uptown",
+        "runtime": 120
+      },
+      {
+        "slug": "silent-friend",
+        "time": "14:30",
+        "venue": "downtown",
+        "runtime": 146
+      },
+      {
+        "slug": "again-again",
+        "time": "15:00",
+        "venue": "uptown",
+        "runtime": 99
+      },
+      {
+        "slug": "american-doctor",
+        "time": "15:30",
+        "venue": "uptown",
+        "runtime": 93
+      },
+      {
+        "slug": "hen",
+        "time": "16:00",
+        "venue": "uptown",
+        "runtime": 96
+      },
+      {
+        "slug": "bucks-harbor",
+        "time": "17:30",
+        "venue": "uptown",
+        "runtime": 98
+      },
+      {
+        "slug": "three-goodbyes",
+        "time": "17:45",
+        "venue": "pacsci",
+        "runtime": 124
+      },
+      {
+        "slug": "murder-in-the-building",
+        "time": "18:00",
+        "venue": "downtown",
+        "runtime": 104
+      },
+      {
+        "slug": "if-i-go-will-they-miss-me",
+        "time": "18:00",
+        "venue": "filmcenter",
+        "runtime": 92
+      },
+      {
+        "slug": "one-of-our-own",
+        "time": "18:00",
+        "venue": "uptown",
+        "runtime": 70
+      },
+      {
+        "slug": "radioheart",
+        "time": "18:30",
+        "venue": "uptown",
+        "runtime": 83
+      },
+      {
+        "slug": "assets-liabilities",
+        "time": "20:00",
+        "venue": "uptown",
+        "runtime": 71
+      },
+      {
+        "slug": "burn",
+        "time": "20:30",
+        "venue": "filmcenter",
+        "runtime": 103
+      },
+      {
+        "slug": "camp",
+        "time": "20:30",
+        "venue": "pacsci",
+        "runtime": 111
+      },
+      {
+        "slug": "tell-everyone",
+        "time": "20:30",
+        "venue": "uptown",
+        "runtime": 112
+      },
+      {
+        "slug": "nightmare-elm-street-djnicfit",
+        "time": "21:00",
+        "venue": "downtown",
+        "runtime": 91
+      },
+      {
+        "slug": "renoir",
+        "time": "21:00",
+        "venue": "uptown",
+        "runtime": 118
+      }
+    ],
+    "2026-05-13": [
+      {
+        "slug": "boorman-and-the-devil",
+        "time": "12:30",
+        "venue": "downtown",
+        "runtime": 112
+      },
+      {
+        "slug": "hold-onto-me",
+        "time": "12:30",
+        "venue": "uptown",
+        "runtime": 102
+      },
+      {
+        "slug": "beat-the-lotto",
+        "time": "12:45",
+        "venue": "uptown",
+        "runtime": 89
+      },
+      {
+        "slug": "one-of-our-own",
+        "time": "13:30",
+        "venue": "uptown",
+        "runtime": 70
+      },
+      {
+        "slug": "maspalomas",
+        "time": "15:00",
+        "venue": "uptown",
+        "runtime": 115
+      },
+      {
+        "slug": "assets-liabilities",
+        "time": "15:30",
+        "venue": "uptown",
+        "runtime": 71
+      },
+      {
+        "slug": "trial-of-hein",
+        "time": "15:45",
+        "venue": "downtown",
+        "runtime": 122
+      },
+      {
+        "slug": "bucks-harbor",
+        "time": "15:45",
+        "venue": "uptown",
+        "runtime": 98
+      },
+      {
+        "slug": "cuba-alaska",
+        "time": "17:45",
+        "venue": "uptown",
+        "runtime": 93
+      },
+      {
+        "slug": "if-i-go-will-they-miss-me",
+        "time": "18:00",
+        "venue": "filmcenter",
+        "runtime": 92
+      },
+      {
+        "slug": "strange-river",
+        "time": "18:00",
+        "venue": "pacsci",
+        "runtime": 106
+      },
+      {
+        "slug": "sound-visions",
+        "time": "18:00",
+        "venue": "uptown",
+        "runtime": 100
+      },
+      {
+        "slug": "three-of-a-kind",
+        "time": "18:30",
+        "venue": "uptown",
+        "runtime": 98
+      },
+      {
+        "slug": "the-red-hangar",
+        "time": "19:00",
+        "venue": "downtown",
+        "runtime": 81
+      },
+      {
+        "slug": "the-condor-daughter",
+        "time": "20:15",
+        "venue": "uptown",
+        "runtime": 109
+      },
+      {
+        "slug": "eight-bridges",
+        "time": "20:30",
+        "venue": "filmcenter",
+        "runtime": 82
+      },
+      {
+        "slug": "becoming-human",
+        "time": "20:30",
+        "venue": "pacsci",
+        "runtime": 99
+      },
+      {
+        "slug": "hijra",
+        "time": "21:00",
+        "venue": "uptown",
+        "runtime": 114
+      },
+      {
+        "slug": "promised-sky",
+        "time": "21:15",
+        "venue": "uptown",
+        "runtime": 95
+      },
+      {
+        "slug": "chili-finger",
+        "time": "21:30",
+        "venue": "downtown",
+        "runtime": 100
+      }
+    ],
+    "2026-05-14": [
+      {
+        "slug": "the-condor-daughter",
+        "time": "12:00",
+        "venue": "uptown",
+        "runtime": 109
+      },
+      {
+        "slug": "burn",
+        "time": "12:15",
+        "venue": "uptown",
+        "runtime": 103
+      },
+      {
+        "slug": "hijra",
+        "time": "12:30",
+        "venue": "uptown",
+        "runtime": 114
+      },
+      {
+        "slug": "amrum",
+        "time": "13:00",
+        "venue": "downtown",
+        "runtime": 93
+      },
+      {
+        "slug": "ivan-hadoum",
+        "time": "14:30",
+        "venue": "uptown",
+        "runtime": 103
+      },
+      {
+        "slug": "when-a-witness-recants",
+        "time": "15:00",
+        "venue": "uptown",
+        "runtime": 117
+      },
+      {
+        "slug": "sundays",
+        "time": "15:30",
+        "venue": "downtown",
+        "runtime": 117
+      },
+      {
+        "slug": "three-of-a-kind",
+        "time": "15:30",
+        "venue": "uptown",
+        "runtime": 98
+      },
+      {
+        "slug": "valentina",
+        "time": "17:30",
+        "venue": "uptown",
+        "runtime": 92
+      },
+      {
+        "slug": "becoming-human",
+        "time": "18:00",
+        "venue": "filmcenter",
+        "runtime": 99
+      },
+      {
+        "slug": "en-route-to",
+        "time": "18:00",
+        "venue": "pacsci",
+        "runtime": 105
+      },
+      {
+        "slug": "the-life-we-leave",
+        "time": "18:00",
+        "venue": "uptown",
+        "runtime": 87
+      },
+      {
+        "slug": "sons-of-the-neon-night",
+        "time": "18:30",
+        "venue": "downtown",
+        "runtime": 124
+      },
+      {
+        "slug": "kikuyu-land",
+        "time": "18:30",
+        "venue": "uptown",
+        "runtime": 93
+      },
+      {
+        "slug": "crystal-cross",
+        "time": "20:00",
+        "venue": "uptown",
+        "runtime": 88
+      },
+      {
+        "slug": "alt-shorts",
+        "time": "20:30",
+        "venue": "filmcenter",
+        "runtime": 81
+      },
+      {
+        "slug": "hanging-by-a-wire",
+        "time": "20:30",
+        "venue": "pacsci",
+        "runtime": 77
+      },
+      {
+        "slug": "silent-friend",
+        "time": "20:30",
+        "venue": "uptown",
+        "runtime": 146
+      },
+      {
+        "slug": "gaua",
+        "time": "21:00",
+        "venue": "uptown",
+        "runtime": 96
+      },
+      {
+        "slug": "body-blow",
+        "time": "21:30",
+        "venue": "downtown",
+        "runtime": 99
+      }
+    ],
+    "2026-05-15": [
+      {
+        "slug": "it-would-be-night-in-caracas",
+        "time": "12:30",
+        "venue": "downtown",
+        "runtime": 97
+      },
+      {
+        "slug": "crystal-cross",
+        "time": "12:30",
+        "venue": "filmcenter",
+        "runtime": 88
+      },
+      {
+        "slug": "broken-english",
+        "time": "12:30",
+        "venue": "uptown",
+        "runtime": 99
+      },
+      {
+        "slug": "hanging-by-a-wire",
+        "time": "13:00",
+        "venue": "uptown",
+        "runtime": 77
+      },
+      {
+        "slug": "the-red-hangar",
+        "time": "13:30",
+        "venue": "uptown",
+        "runtime": 81
+      },
+      {
+        "slug": "murder-in-the-building",
+        "time": "15:00",
+        "venue": "downtown",
+        "runtime": 104
+      },
+      {
+        "slug": "valentina",
+        "time": "15:00",
+        "venue": "filmcenter",
+        "runtime": 92
+      },
+      {
+        "slug": "en-route-to",
+        "time": "15:00",
+        "venue": "uptown",
+        "runtime": 105
+      },
+      {
+        "slug": "radioheart",
+        "time": "15:30",
+        "venue": "uptown",
+        "runtime": 83
+      },
+      {
+        "slug": "kikuyu-land",
+        "time": "16:00",
+        "venue": "uptown",
+        "runtime": 93
+      },
+      {
+        "slug": "roid",
+        "time": "17:30",
+        "venue": "filmcenter",
+        "runtime": 109
+      },
+      {
+        "slug": "jaripeo",
+        "time": "17:30",
+        "venue": "uptown",
+        "runtime": 71
+      },
+      {
+        "slug": "balandrau",
+        "time": "18:00",
+        "venue": "downtown",
+        "runtime": 116
+      },
+      {
+        "slug": "to-hold-a-mountain",
+        "time": "18:00",
+        "venue": "pacsci",
+        "runtime": 105
+      },
+      {
+        "slug": "primavera",
+        "time": "18:00",
+        "venue": "uptown",
+        "runtime": 110
+      },
+      {
+        "slug": "teachings-of-the-elders",
+        "time": "18:30",
+        "venue": "uptown",
+        "runtime": 70
+      },
+      {
+        "slug": "eight-bridges",
+        "time": "20:30",
+        "venue": "filmcenter",
+        "runtime": 82
+      },
+      {
+        "slug": "meadowlarks",
+        "time": "20:30",
+        "venue": "pacsci",
+        "runtime": 102
+      },
+      {
+        "slug": "animation4adults",
+        "time": "21:00",
+        "venue": "uptown",
+        "runtime": 92
+      },
+      {
+        "slug": "i-want-your-sex",
+        "time": "21:15",
+        "venue": "downtown",
+        "runtime": 90
+      },
+      {
+        "slug": "fifteen",
+        "time": "23:59",
+        "venue": "downtown",
+        "runtime": 99
+      }
+    ],
+    "2026-05-16": [
+      {
+        "slug": "sons-of-the-neon-night",
+        "time": "11:30",
+        "venue": "downtown",
+        "runtime": 124
+      },
+      {
+        "slug": "reality-check",
+        "time": "12:00",
+        "venue": "filmcenter",
+        "runtime": 93
+      },
+      {
+        "slug": "another-world",
+        "time": "12:00",
+        "venue": "uptown",
+        "runtime": 111
+      },
+      {
+        "slug": "meadowlarks",
+        "time": "12:30",
+        "venue": "uptown",
+        "runtime": 102
+      },
+      {
+        "slug": "the-life-we-leave",
+        "time": "13:00",
+        "venue": "uptown",
+        "runtime": 87
+      },
+      {
+        "slug": "cookie-queens",
+        "time": "13:30",
+        "venue": "pacsci",
+        "runtime": 91
+      },
+      {
+        "slug": "powwow-people",
+        "time": "14:30",
+        "venue": "downtown",
+        "runtime": 106
+      },
+      {
+        "slug": "roid",
+        "time": "14:30",
+        "venue": "filmcenter",
+        "runtime": 109
+      },
+      {
+        "slug": "i-want-your-sex",
+        "time": "14:45",
+        "venue": "uptown",
+        "runtime": 90
+      },
+      {
+        "slug": "jaripeo",
+        "time": "15:15",
+        "venue": "uptown",
+        "runtime": 71
+      },
+      {
+        "slug": "lady",
+        "time": "15:30",
+        "venue": "uptown",
+        "runtime": 95
+      },
+      {
+        "slug": "aanikoobijigan",
+        "time": "16:00",
+        "venue": "pacsci",
+        "runtime": 93
+      },
+      {
+        "slug": "spacing-out",
+        "time": "17:15",
+        "venue": "filmcenter",
+        "runtime": 101
+      },
+      {
+        "slug": "love-chaos-kin",
+        "time": "17:15",
+        "venue": "uptown",
+        "runtime": 98
+      },
+      {
+        "slug": "phoenix-jones",
+        "time": "17:30",
+        "venue": "uptown",
+        "runtime": 116
+      },
+      {
+        "slug": "the-big-cheese",
+        "time": "18:15",
+        "venue": "uptown",
+        "runtime": 101
+      },
+      {
+        "slug": "it-would-be-night-in-caracas",
+        "time": "18:30",
+        "venue": "downtown",
+        "runtime": 97
+      },
+      {
+        "slug": "gaua",
+        "time": "19:00",
+        "venue": "pacsci",
+        "runtime": 96
+      },
+      {
+        "slug": "black-burns-fast",
+        "time": "20:00",
+        "venue": "filmcenter",
+        "runtime": 96
+      },
+      {
+        "slug": "rising-through-the-fray",
+        "time": "20:00",
+        "venue": "uptown",
+        "runtime": 88
+      },
+      {
+        "slug": "three-goodbyes",
+        "time": "20:30",
+        "venue": "uptown",
+        "runtime": 124
+      },
+      {
+        "slug": "fifteen",
+        "time": "21:00",
+        "venue": "uptown",
+        "runtime": 99
+      },
+      {
+        "slug": "chili-finger",
+        "time": "21:15",
+        "venue": "downtown",
+        "runtime": 110
+      },
+      {
+        "slug": "the-furious",
+        "time": "23:59",
+        "venue": "downtown",
+        "runtime": 113
+      }
+    ],
+    "2026-05-17": [
+      {
+        "slug": "cookie-queens",
+        "time": "11:00",
+        "venue": "uptown",
+        "runtime": 91
+      },
+      {
+        "slug": "lady",
+        "time": "11:30",
+        "venue": "uptown",
+        "runtime": 95
+      },
+      {
+        "slug": "strange-river",
+        "time": "11:45",
+        "venue": "uptown",
+        "runtime": 106
+      },
+      {
+        "slug": "aanikoobijigan",
+        "time": "12:00",
+        "venue": "filmcenter",
+        "runtime": 93
+      },
+      {
+        "slug": "prisoners-of-the-earth",
+        "time": "13:30",
+        "venue": "downtown",
+        "runtime": 86
+      },
+      {
+        "slug": "rising-through-the-fray",
+        "time": "13:30",
+        "venue": "pacsci",
+        "runtime": 88
+      },
+      {
+        "slug": "the-big-cheese",
+        "time": "13:30",
+        "venue": "uptown",
+        "runtime": 101
+      },
+      {
+        "slug": "phoenix-jones",
+        "time": "14:00",
+        "venue": "uptown",
+        "runtime": 116
+      },
+      {
+        "slug": "body-blow",
+        "time": "14:15",
+        "venue": "uptown",
+        "runtime": 99
+      },
+      {
+        "slug": "black-burns-fast",
+        "time": "14:30",
+        "venue": "filmcenter",
+        "runtime": 96
+      },
+      {
+        "slug": "sundays",
+        "time": "16:00",
+        "venue": "downtown",
+        "runtime": 117
+      },
+      {
+        "slug": "beat-the-lotto",
+        "time": "16:00",
+        "venue": "pacsci",
+        "runtime": 89
+      },
+      {
+        "slug": "love-chaos-kin",
+        "time": "16:15",
+        "venue": "uptown",
+        "runtime": 98
+      },
+      {
+        "slug": "powwow-people",
+        "time": "16:30",
+        "venue": "uptown",
+        "runtime": 106
+      },
+      {
+        "slug": "balandrau",
+        "time": "17:00",
+        "venue": "uptown",
+        "runtime": 116
+      },
+      {
+        "slug": "happy-birthday",
+        "time": "18:30",
+        "venue": "pacsci",
+        "runtime": 92
+      },
+      {
+        "slug": "the-invite",
+        "time": "19:00",
+        "venue": "downtown",
+        "runtime": 107
+      },
+      {
+        "slug": "the-furious",
+        "time": "19:45",
+        "venue": "uptown",
+        "runtime": 113
+      }
+    ]
+  },
+  "venues": {
+    "uptown": "SIFF Cinema Uptown",
+    "downtown": "SIFF Cinema Downtown",
+    "filmcenter": "SIFF Film Center",
+    "pacsci": "Pacific Science Center",
+    "paramount": "Paramount Theatre",
+    "library": "Seattle Central Library"
+  },
+  "venue_addresses": {
+    "uptown": "511 Queen Anne Ave N",
+    "downtown": "2100 4th Ave",
+    "filmcenter": "167 Republican Street",
+    "pacsci": "200 Sue Bird Ct",
+    "paramount": "911 Pine St",
+    "library": "1000 4th Ave"
+  },
+  "film_picks": {
+    "barbara-forever": [
+      {
+        "programmer": "Beth Barrett",
+        "role": "Artistic Director",
+        "blurb": "Barbara Hammer's work is iconic, but even more iconic? Barbara Hammer herself \u2014 a beacon for queer artists everywhere."
+      },
+      {
+        "programmer": "Marcus Gorman",
+        "role": "Programmer",
+        "blurb": "A propulsively constructed biodoc about pioneering queer filmmaker and activist Barbara Hammer."
+      },
+      {
+        "programmer": "Kathleen Mullen",
+        "role": "Programmer",
+        "blurb": "Everyone should know the work of Barbara Hammer, a groundbreaking avant-garde feminist filmmaker whose body of work helped define lesbian cinema and explore themes of identity, gender, and sexuality."
+      },
+      {
+        "programmer": "Andy Spletzer",
+        "role": "Programmer",
+        "blurb": "Back when the American avant-garde film scene was mostly men, Barbara Hammer created iconoclastic films full of lesbian desire. She believes she should get more credit for being an avant-garde pioneer, and after watching this you'll agree."
+      }
+    ],
+    "birds-of-war": [
+      {
+        "programmer": "Beth Barrett",
+        "role": "Artistic Director",
+        "blurb": "In the middle of revolution, war and exile, two journalists find romance as they connect through text and video calls over 13 years. Truly emotional and immersive, as devastating as it is uplifting."
+      },
+      {
+        "programmer": "Justine Barda",
+        "role": "Senior Programmer",
+        "blurb": "This engaging and heartwarming love story also provides startling insight into what it means to live a life conditioned by the experience of war and exile."
+      },
+      {
+        "programmer": "Tracy Rector",
+        "role": "Programmer",
+        "blurb": "An epic love story unfolds at the intersection of war and the newsroom, where two lives find one another amidst conflict. As their bond deepens, their journey weaves together Syrian and Lebanese histories, Christian and Muslim traditions."
+      },
+      {
+        "programmer": "Alison Jean Smith",
+        "role": "Festival Programming Coordinator",
+        "blurb": "A BBC reporter falls for her source, a Syrian photographer and dissident, in this deeply touching love story told across continents and war zones. I was immediately drawn in by the doc's inventive use of intimate personal archives, including texts and voice notes."
+      }
+    ],
+    "the-friends-house-is-here": [
+      {
+        "programmer": "Beth Barrett",
+        "role": "Artistic Director",
+        "blurb": "An unexpected discovery \u2014 the underground theatre and dance scene in Tehran comes to life in this authentic indie."
+      },
+      {
+        "programmer": "Justine Barda",
+        "role": "Senior Programmer",
+        "blurb": "As the US continues its bombing of Iran, I'm glad to be showing a film that is a potent, positive reminder of the full humanity of the people who live there."
+      },
+      {
+        "programmer": "Alison Jean Smith",
+        "role": "Festival Programming Coordinator",
+        "blurb": "A Sundance favorite, this tender story of female friendship and defiance, set in Tehran's arts underground, was shot covertly and smuggled out of the country."
+      }
+    ],
+    "hen": [
+      {
+        "programmer": "Beth Barrett",
+        "role": "Artistic Director",
+        "blurb": "In a true Festival film, Gy\u00f6rgy P\u00e1lfi returns with a tale of a hen in peril, who just wants to hatch an egg."
+      }
+    ],
+    "hot-water": [
+      {
+        "programmer": "Beth Barrett",
+        "role": "Artistic Director",
+        "blurb": "A lyrical mother-son road movie of self discovery from first time director Ramzi Bashour. With a terrific turn from SIFF favorite Dale Dickey."
+      }
+    ],
+    "three-of-a-kind": [
+      {
+        "programmer": "Beth Barrett",
+        "role": "Artistic Director",
+        "blurb": "Three generations of women come together for one last Christmas, unbeknownst to one of them, in this Danish family drama."
+      },
+      {
+        "programmer": "Alison Jean Smith",
+        "role": "Festival Programming Coordinator",
+        "blurb": "A mother-daughter-grandmother dramedy that passes the Bechdel Test with flying colors. Bonus points if you bring your grandma to the screening, and extra bonus points if you take her out afterwards!"
+      }
+    ],
+    "when-a-witness-recants": [
+      {
+        "programmer": "Beth Barrett",
+        "role": "Artistic Director",
+        "blurb": "Powerful new doc from Dawn Porter and Ta-Nehisi Coates exploring prosecutorial misconduct, police negligence, systemic racism, and the generational harm done to three innocent Black boys in Baltimore, imprisoned for 36 years for a crime they did not commit."
+      }
+    ],
+    "yo": [
+      {
+        "programmer": "Beth Barrett",
+        "role": "Artistic Director",
+        "blurb": "Anna Fitch and Banker White have created a love letter to friendship, generational connection, and frankly, to art itself."
+      },
+      {
+        "programmer": "Kathleen Mullen",
+        "role": "Programmer",
+        "blurb": "Anna and Yo are two kindred spirits who form an unbreakable intergenerational friendship. After Yo's death, the director Anna creates a detailed miniature replica of her home \u2014 a creative, one-of-a-kind documentary."
+      }
+    ],
+    "i-love-boosters": [
+      {
+        "programmer": "Beth Barrett",
+        "role": "Artistic Director",
+        "blurb": "Our Opening Night tentpole (Boots Riley) represents what is right in US independent cinema today \u2014 a singular artist not afraid to take a swing, trust their actors, and create something wholly original."
+      },
+      {
+        "programmer": "Megan Leonard",
+        "role": "Festival Programming Manager",
+        "blurb": "Boots! Duh!"
+      },
+      {
+        "programmer": "Megan Garbayo-L\u00f3pez",
+        "role": "Programmer",
+        "blurb": "A booster is a person who jacks from the retail and sells it in the hood for dirt-cheap resale. Boots Riley could open a paper bag and I'd be sat. I love them boosters; They love them boosters; You should love them too!"
+      },
+      {
+        "programmer": "Darcy Wytko",
+        "role": "Shorts Programmer",
+        "blurb": "It's Boots Riley!"
+      }
+    ],
+    "the-invite": [
+      {
+        "programmer": "Beth Barrett",
+        "role": "Artistic Director",
+        "blurb": "Our Closing Night tentpole (Olivia Wilde) \u2014 a singular artist unafraid to explore really deep topics while making people laugh."
+      },
+      {
+        "programmer": "Megan Leonard",
+        "role": "Festival Programming Manager",
+        "blurb": "Double dose of Olivia Wilde how can you go wrong? Back in the director's chair and bringing the laughs."
+      },
+      {
+        "programmer": "Andy Spletzer",
+        "role": "Programmer",
+        "blurb": "Everything I read about this movie after its Sundance premiere made me want to see it. I look forward to getting an invite to this, our closing night feature."
+      }
+    ],
+    "i-want-your-sex": [
+      {
+        "programmer": "Megan Leonard",
+        "role": "Festival Programming Manager",
+        "blurb": "Oh you want Araki-coded? How about the real thing?? Olivia Wilde goes full tilt and it's silly fun."
+      },
+      {
+        "programmer": "Darcy Wytko",
+        "role": "Shorts Programmer",
+        "blurb": "It's Gregg Araki!"
+      }
+    ],
+    "valentina": [
+      {
+        "programmer": "Megan Leonard",
+        "role": "Festival Programming Manager",
+        "blurb": "Truly a discovery. Keyla Monterroso Mejia shines in this El Paso-set comedic hybrid that scored director Tatti Ribeiro the Someone to Watch Award at the Independent Spirit Awards earlier this year."
+      },
+      {
+        "programmer": "Marcus Gorman",
+        "role": "Programmer",
+        "blurb": "A Spirit Award-winning narrative/doc hybrid starring Keyla Monterroso Mejia (One of Them Days, 'Abbott Elementary') and the working-class citizens of El Paso."
+      }
+    ],
+    "drunken-noodles": [
+      {
+        "programmer": "Megan Leonard",
+        "role": "Festival Programming Manager",
+        "blurb": "\u00a1Qu\u00e9 er\u00f3tico! S\u00ed por favor *finger claps*"
+      },
+      {
+        "programmer": "Jesse Knight",
+        "role": "Shorts Programmer",
+        "blurb": "Sumptuous, slutty, and singular."
+      },
+      {
+        "programmer": "Marcus Gorman",
+        "role": "Programmer",
+        "blurb": "A sensitive, erotic, and elliptically told examination of modern queer romance worth your attention."
+      }
+    ],
+    "nuisance-bear": [
+      {
+        "programmer": "Megan Leonard",
+        "role": "Festival Programming Manager",
+        "blurb": "Move over cats, it's the year of the polar bear. Chills!!"
+      },
+      {
+        "programmer": "Kimberly Dinehart",
+        "role": "Shorts Programmer",
+        "blurb": "This was an amazing documentary short from 2021, distributed by The New Yorker. It is so exciting to see the final, expanded project as a feature length documentary."
+      },
+      {
+        "programmer": "Alison Jean Smith",
+        "role": "Festival Programming Coordinator",
+        "blurb": "A film that demands to be seen on the biggest screen you can find. Come for the jaw-dropping, up-close-and-personal polar bear photography; stay for the thoughtful commentary on our uneasy animal-human coexistence."
+      }
+    ],
+    "the-best-summer": [
+      {
+        "programmer": "Megan Leonard",
+        "role": "Festival Programming Manager",
+        "blurb": "The legendary Tamra Davis (yes, of Crossroads and so much more fame) returns to the festival with a 1995 time capsule of the music scene of the era. Kathleen Hanna! Kim Gordon! Beastie Boys! Beck! C'mon!"
+      },
+      {
+        "programmer": "Kimberly Dinehart",
+        "role": "Shorts Programmer",
+        "blurb": "The 90s are back! Or maybe they never left. So many of my favorite artists, as we've never seen them before. Also as a former history major, archival stuff is the best."
+      },
+      {
+        "programmer": "Darcy Wytko",
+        "role": "Shorts Programmer",
+        "blurb": "Who doesn't want to go back to 1995 and see Sonic Youth, Bikini Kill, and the Beastie Boys shot by Tamra Davis? Sign me up."
+      }
+    ],
+    "broken-english": [
+      {
+        "programmer": "Megan Leonard",
+        "role": "Festival Programming Manager",
+        "blurb": "From the team who brought you 20,000 Days on Earth, comes another unconventional music doc \u2013 this time rock icon Marianne Faithful takes center stage and reminds us why she's unforgettable."
+      },
+      {
+        "programmer": "Darcy Wytko",
+        "role": "Shorts Programmer",
+        "blurb": "An ode to Marianne Faithful with Tilda Swinton. Yes. Please."
+      }
+    ],
+    "shortsfest-opening-night": [
+      {
+        "programmer": "Megan Leonard",
+        "role": "Festival Programming Manager",
+        "blurb": "Absolutely stacked \u2014 Don Hertzfeldt?? Exploding whale carcass!! Legends."
+      },
+      {
+        "programmer": "Kimberly Dinehart",
+        "role": "Shorts Programmer",
+        "blurb": "A couple of my favorite shorts this year are playing in our opening night program, including Oh Whale, a documentary about the infamous whale explosion in Oregon in 1970, and Nobody Knows the World, an immersive portrait of what it means to come of age on the outskirts of society."
+      },
+      {
+        "programmer": "Darcy Wytko",
+        "role": "Shorts Programmer",
+        "blurb": "Don Hertzfeldt is a genius. Let Paper Trail break you."
+      },
+      {
+        "programmer": "Nichole Young",
+        "role": "Shorts Programmer",
+        "blurb": "Cry a little, laugh a little, cringe a little; revel in the greatness of ShortsFest Opening Night! I wanna hear ALL your beatboxing attempts (failed and successful) after Scratch plays."
+      }
+    ],
+    "wtf-nightmare-fuel": [
+      {
+        "programmer": "Megan Leonard",
+        "role": "Festival Programming Manager",
+        "blurb": "Ohhoho what a naughty batch of short films. Enter at your own peril!"
+      },
+      {
+        "programmer": "Dan Doody",
+        "role": "Senior Programmer",
+        "blurb": "A mash-up of our annual WTF! and horror-themed short film packages, the films here take you on a progression from the disturbing to the chilling to the disgusting \u2014 Enjoy!"
+      }
+    ],
+    "promised-sky": [
+      {
+        "programmer": "Justine Barda",
+        "role": "Senior Programmer",
+        "blurb": "This is a warm-hearted but clear-eyed feature about three Ivorian immigrant women in Tunisia and the fragile web of community that holds them together."
+      }
+    ],
+    "american-doctor": [
+      {
+        "programmer": "Justine Barda",
+        "role": "Senior Programmer",
+        "blurb": "This is difficult but essential viewing, with information that's difficult to find elsewhere. Documentary filmmaking at its most important."
+      }
+    ],
+    "becoming-human": [
+      {
+        "programmer": "Justine Barda",
+        "role": "Senior Programmer",
+        "blurb": "I found this quirky, quiet, beautiful film about the ghosts (literally) of the Cambodian Civil War unexpectedly moving."
+      }
+    ],
+    "happy-birthday": [
+      {
+        "programmer": "Justine Barda",
+        "role": "Senior Programmer",
+        "blurb": "Two of my favorite SIFF selections this year are films with lead characters who are young girls coming to an adult understanding of the world they live in (in this case an economically stratified Cairo), and their position in it."
+      }
+    ],
+    "hijra": [
+      {
+        "programmer": "Justine Barda",
+        "role": "Senior Programmer",
+        "blurb": "This is the other film with a young girl protagonist \u2014 in this case, a Saudi girl who goes on a pilgrimage to Mecca with her sister and grandmother that throws into sharp relief the gendered constraints that shape their lives."
+      }
+    ],
+    "amrum": [
+      {
+        "programmer": "Justine Barda",
+        "role": "Senior Programmer",
+        "blurb": "I am a longtime fan of the director Fatih Akin and one thing I admire about his work is his willingness to take it in new directions, as he does in this intelligent period study of a young German boy and his family at the end of WWII."
+      },
+      {
+        "programmer": "Martin Schwartz",
+        "role": "Programmer",
+        "blurb": "Not only the latest from Fatih Akin, also the last film of Hark Bohm, who co-wrote. Set on a remote North Sea island, this one features German-on-German hate in the waning days of WWII and a truly chilling performance from Laura Tonke as the narrator's Nazi mom: think H\u00fcller in The Zone of Interest."
+      }
+    ],
+    "beat-the-lotto": [
+      {
+        "programmer": "Dan Doody",
+        "role": "Senior Programmer",
+        "blurb": "For anyone who has plopped down a couple of dollars for a lottery ticket and thought, 'Can I actually win?' Shortly after Ireland established its National Lottery, a mathematician came up with a plan to beat the odds, and then that plan went public."
+      }
+    ],
+    "boorman-and-the-devil": [
+      {
+        "programmer": "Dan Doody",
+        "role": "Senior Programmer",
+        "blurb": "I love filmmaking docs, and Boorman and the Devil is one of my favorites! Exorcist II: The Heretic was one of Hollywood's all time biggest misfires (or was it?). Director John Boorman revisits its production in lengthy candid and honest interviews, the passage of 50 years providing a new clarity."
+      },
+      {
+        "programmer": "Colleen O'Holleran",
+        "role": "Programmer",
+        "blurb": "Boorman and the Devil is the definitive account of one of the most infamous sequels ever made. A deep dive into the making of Exorcist II: The Heretic."
+      }
+    ],
+    "bucks-harbor": [
+      {
+        "programmer": "Dan Doody",
+        "role": "Senior Programmer",
+        "blurb": "Exploring the lives of Maine lobsterman, Bucks Harbor is one of the most beautiful and touching documentary films I've ever seen, vividly capturing the inner lives, quiet wisdom, and profound sympathies of its subjects \u2014 this is humanist filmmaking of the highest order."
+      },
+      {
+        "programmer": "Marcus Gorman",
+        "role": "Programmer",
+        "blurb": "A verit\u00e9 deconstruction of masculinity in a coastal Maine fishing town."
+      },
+      {
+        "programmer": "Kathleen Mullen",
+        "role": "Programmer",
+        "blurb": "With a strong point of view, director Pete Muller reflects on masculinity in a traditional fishing community in Maine, exploring how to navigate identity amid generational expectations of what it means to be a man."
+      },
+      {
+        "programmer": "Andy Spletzer",
+        "role": "Programmer",
+        "blurb": "This slice-of-life look at a small fishing village in Maine is actually a stealth doc about masculinity in rural towns, including one married man who performs on the internet in drag. This one sneaks up on you."
+      }
+    ],
+    "the-furious": [
+      {
+        "programmer": "Dan Doody",
+        "role": "Senior Programmer",
+        "blurb": "I don't think I had more fun watching a SIFF screener this year than when I watched The Furious. A mute fighting master and a cop team up to rescue the former's daughter from a nefarious ring of child traffickers in this frenzied frenetic Hong Kong martial arts extravaganza."
+      },
+      {
+        "programmer": "Marcus Gorman",
+        "role": "Programmer",
+        "blurb": "I cannot stress this enough: Don't kidnap children. Not only is it extremely evil, but you will also get the shit kicked out of you by the two leads of this martial arts brawler out of Hong Kong."
+      },
+      {
+        "programmer": "Colleen O'Holleran",
+        "role": "Programmer",
+        "blurb": "The Furious delivers exactly what you'd expect from acclaimed action choreographer-turned director, Kenji Tanigaki \u2014 and then some. See it loud."
+      }
+    ],
+    "gaua": [
+      {
+        "programmer": "Dan Doody",
+        "role": "Senior Programmer",
+        "blurb": "Basque filmmaker Paul Urkijo Alijo returns to SIFF with what might be my favorite film of his so far. Set in the 17th Century, the film follows housewife Kattalin who flees from her domineering husband into the deep, dark forest. There she meets three weird sisters whose village gossip turns sinister, weaving a web of dark fables."
+      },
+      {
+        "programmer": "Rhys Iliakis",
+        "role": "SIFF Graphic Designer and Shorts Programmer",
+        "blurb": "Festival-favorite Paul Urkijo Alijo is back with another amazing Basque nightmare you won't want to miss if you like folk horror. Sometimes the witchcraft was simply the friends (and lovers?) we made along the way."
+      },
+      {
+        "programmer": "Marcus Gorman",
+        "role": "Programmer",
+        "blurb": "The ambitious, cathartic Gaua from SIFF alum Paul Urkijo Alijo (Errementari, Irati)."
+      },
+      {
+        "programmer": "Colleen O'Holleran",
+        "role": "Programmer",
+        "blurb": "From the director of Errementari and Irati comes Gaua, a Basque folk horror anthology set during the Inquisition. Three women gather in the woods to tell scary stories, and what follows is both strange and surreal."
+      }
+    ],
+    "lady": [
+      {
+        "programmer": "Dan Doody",
+        "role": "Senior Programmer",
+        "blurb": "If a mash-up of 'Real Housewives,' Sunset Boulevard, and peak 'Ab Fab' sounds up your alley, then get in line now for this one. Sian Clifford, who played Phoebe Waller-Bridge's sister in 'Fleabag,' stars as the absurdly entitled Lady Isabella, whose vanity project turns disastrous when something unseen happens."
+      },
+      {
+        "programmer": "Alison Jean Smith",
+        "role": "Festival Programming Coordinator",
+        "blurb": "Still waiting for Season 3 of 'Fleabag?' Scratch the 'Fleabag' itch with this bitingly funny mockumentary starring Sian Clifford (Claire herself!) as a lonesome aristocrat who tricks a TV crew into filming her life."
+      }
+    ],
+    "prisoners-of-the-earth": [
+      {
+        "programmer": "Dan Doody",
+        "role": "Senior Programmer",
+        "blurb": "One of Argentina's greatest films, Prisioneros de la tierra is a powder keg of economic exploitation, revenge thriller, and top tier Latin American melodrama, all rendered in a shadowy expressionist style that anticipates film noir."
+      }
+    ],
+    "queen-kelly": [
+      {
+        "programmer": "Dan Doody",
+        "role": "Senior Programmer",
+        "blurb": "Remember in Sunset Boulevard when Norma Desmond was watching herself on-screen? She was watching Queen Kelly, one of the silent era's most ambitious productions. This glorious new restoration uses von Stroheim's original shooting script and ingeniously incorporates previously unseen material to recreate the film's original ending."
+      }
+    ],
+    "the-red-hangar": [
+      {
+        "programmer": "Hebe Tabachnik",
+        "role": "Senior Programmer",
+        "blurb": "In the aftermath of the 1973 Chilean coup d'\u00e9tat, a logistics officer at an Air Force training school is ordered to convert a hangar into a detention and torture center. Winner of the Audience, Critics' Jury and Best Actor awards at the 2026 Malaga Film Festival."
+      }
+    ],
+    "balandrau": [
+      {
+        "programmer": "Hebe Tabachnik",
+        "role": "Senior Programmer",
+        "blurb": "On December 30, 2000, friends climbing Balandrau mountain in the Catalan Pyrenees are caught in a sudden, savage blizzard. Visibility vanishes, winds roar, and survival becomes a desperate fight against one of the mountain's deadliest storms."
+      }
+    ],
+    "maspalomas": [
+      {
+        "programmer": "Hebe Tabachnik",
+        "role": "Senior Programmer",
+        "blurb": "After a stroke while vacationing in the gay haven of Maspalomas, Vicente \u2014 played by Jos\u00e9 Ram\u00f3n Soroiz, winner of the 2026 Goya Award for Best Lead Actor \u2014 is placed in a nursing home where he's forced back into the closet, confronting a fight for freedom he thought he'd already won."
+      }
+    ],
+    "sundays": [
+      {
+        "programmer": "Hebe Tabachnik",
+        "role": "Senior Programmer",
+        "blurb": "Winner of the Golden Shell at San Sebasti\u00e1n and the standout at this year's Goya Awards \u2014 where it took Best Film, Best Director, Best Screenplay, and acting honors \u2014 Alauda Ruiz de Az\u00faa's latest is a powerful exploration of the fragile balance between faith and skepticism."
+      }
+    ],
+    "jaripeo": [
+      {
+        "programmer": "Hebe Tabachnik",
+        "role": "Senior Programmer",
+        "blurb": "Set amid Michoac\u00e1n's electrifying bull-riding celebrations, Jaripeo uncovers queer desire within a fiercely hypermasculine world \u2014 blending music, dance, and intimate stories into a vibrant celebration of sensuality and joy."
+      }
+    ],
+    "one-of-our-own": [
+      {
+        "programmer": "Hebe Tabachnik",
+        "role": "Senior Programmer",
+        "blurb": "Catalan chef Joan Roca, hailed as the 'Messi of the kitchen,' is a revolutionary force in gastronomy. Twenty of Spain's top chefs, together holding 70 Michelin stars, unite to craft an extraordinary banquet celebrating Roca's generosity, vision, and pioneering culinary genius."
+      }
+    ],
+    "the-garden-we-dreamed": [
+      {
+        "programmer": "Hebe Tabachnik",
+        "role": "Senior Programmer",
+        "blurb": "A Haitian family migrating through Mexico becomes entangled in illegal logging. Winner of Best Picture, Best Direction, and Best Cinematography at the 2026 Malaga Festival."
+      }
+    ],
+    "ivan-hadoum": [
+      {
+        "programmer": "Hebe Tabachnik",
+        "role": "Senior Programmer",
+        "blurb": "Amid the sprawling greenhouses of Almer\u00eda, trans man Iv\u00e1n and migrant Hadoum share an unexpected, electric connection \u2014 until he becomes her boss. Winner of the 2026 Berlinale Teddy Award, Special Jury Prize, and Best Male Performance at M\u00e1laga."
+      }
+    ],
+    "the-condor-daughter": [
+      {
+        "programmer": "Hebe Tabachnik",
+        "role": "Senior Programmer",
+        "blurb": "A talent to watch, Bolivian director Alvaro Olmos Torrico makes a striking debut: Clara, a young Quechua midwife with sacred songs in her voice, leaves her Andean village to chase a singing dream \u2014 only to confront a powerful choice between the spotlight and her ancestral calling."
+      },
+      {
+        "programmer": "Tracy Rector",
+        "role": "Programmer",
+        "blurb": "The Condor Daughter moves between mountain and city as if between worlds of breath and noise, spirit and fracture. Through restrained sound, deliberate rhythm, Quechua vision, the film becomes a meditation on belonging, inheritance, and becoming."
+      }
+    ],
+    "strange-river": [
+      {
+        "programmer": "Hebe Tabachnik",
+        "role": "Senior Programmer",
+        "blurb": "Sixteen-year-old D\u00eddac spends a summer cycling along the Danube with his family. When a mysterious boy appears, new emotions stir, subtly shifting family dynamics through a transformative journey of first love and self-discovery."
+      }
+    ],
+    "the-seoul-guardians": [
+      {
+        "programmer": "SuJ'n Chon",
+        "role": "Programmer",
+        "blurb": "My heart raced during this thrilling documentary on the six-hour South Korean martial law crisis during a snowy December 2024 self-coup attempt. Triumphant yet deeply unsettling."
+      },
+      {
+        "programmer": "Shailaja Rao",
+        "role": "Programmer",
+        "blurb": "The Seoul Guardians puts you inside the night of December 3, 2024, on the streets, inside the National Assembly, beside citizens and soldiers. The editing is precise, the tension never breaks."
+      }
+    ],
+    "if-i-go-will-they-miss-me": [
+      {
+        "programmer": "SuJ'n Chon",
+        "role": "Programmer",
+        "blurb": "Beautiful camerawork aside, rare are films that portray Black fathers and sons with such layered empathy. I was genuinely floored by its emotional honesty."
+      },
+      {
+        "programmer": "Darcy Wytko",
+        "role": "Shorts Programmer",
+        "blurb": "Visionary. Walter Thompson-Hernandez is one to watch."
+      }
+    ],
+    "silent-friend": [
+      {
+        "programmer": "SuJ'n Chon",
+        "role": "Programmer",
+        "blurb": "Who knew that a 2.5-hour film about a tree could be so captivating? Plus Tony Leung Chiu-Wai in his second role outside Asia \u2014 enough said."
+      },
+      {
+        "programmer": "Jesse Knight",
+        "role": "Shorts Programmer",
+        "blurb": "No but seriously why am I weeping over a tree? You may be asking the same question during Hungarian master Ildik\u00f3 Enyedi's sweeping and transportive cosmic epic."
+      },
+      {
+        "programmer": "Martin Schwartz",
+        "role": "Programmer",
+        "blurb": "Endlessly photogenic Tony Leung returns as a scientist quarantined with a possessive groundskeeper during the darkest days of 2020. The film is kind of a love triangle between them and an extremely old tree. Can we speak with plants? I finished this delightful pic thinking, of course we can."
+      }
+    ],
+    "deadline": [
+      {
+        "programmer": "SuJ'n Chon",
+        "role": "Programmer",
+        "blurb": "Director Kiwi Chow pairs striking visuals with a tense narrative for a gripping, thought-provoking film about high-pressure student culture in Hong Kong, cementing his controversial acclaim."
+      },
+      {
+        "programmer": "Shailaja Rao",
+        "role": "Programmer",
+        "blurb": "Deadline draws the viewer in despite its cold and devastating aesthetic. Kiwi Chow doesn't sensationalize. He lets the narrative build, the frames drain of warmth, and the audience feel the weight on their own terms."
+      }
+    ],
+    "love-chaos-kin": [
+      {
+        "programmer": "SuJ'n Chon",
+        "role": "Programmer",
+        "blurb": "Spanning years, this surprising transracial adoption story follows the Iyers, Hindu American parents raising white-presenting twins while keeping ties to their struggling white birthmother and paternal Navajo ancestry."
+      },
+      {
+        "programmer": "Kathleen Mullen",
+        "role": "Programmer",
+        "blurb": "In this open transracial adoption, Chithra, an Indian mother who, with her husband, adopts twins born to a white woman and a Native American man."
+      },
+      {
+        "programmer": "Shailaja Rao",
+        "role": "Programmer",
+        "blurb": "At a time when diversity and inclusion are under pressure, Love Chaos Kin shows what those values actually look like in practice \u2014 not as policy, but as a family's everyday choices. Warm, clear-eyed, and quietly radical."
+      }
+    ],
+    "en-route-to": [
+      {
+        "programmer": "SuJ'n Chon",
+        "role": "Programmer",
+        "blurb": "This strong debut treats sobering issues with a light touch, offering a touching coming-of-age tale about female friendship."
+      }
+    ],
+    "cotton-queen": [
+      {
+        "programmer": "SuJ'n Chon",
+        "role": "Programmer",
+        "blurb": "Gorgeously shot with strong performances and assured filmmaking from Sudan, rarely seen by international audiences."
+      }
+    ],
+    "trial-of-hein": [
+      {
+        "programmer": "SuJ'n Chon",
+        "role": "Programmer",
+        "blurb": "An intriguing mystery about a man who returns to a tiny German island claiming to be a boy who left years ago \u2014 unrecognized by locals, even his own mother. Hmm\u2026"
+      },
+      {
+        "programmer": "Martin Schwartz",
+        "role": "Programmer",
+        "blurb": "I'm pretty sure this is the only SIFF lineup ever with two feature films set and shot on remote German islands in the North Sea. Stunning debut pic straight from the Berlinale \u2014 a sizzling dramatic investigation of an isolated, xenophobic fishing community and what happens when a stranger shows up in their midst."
+      }
+    ],
+    "spacing-out": [
+      {
+        "programmer": "Kimberly Dinehart",
+        "role": "Shorts Programmer",
+        "blurb": "Our queer shorts program this year has one of my favorite shorts I have ever seen as its centerpiece, Skin on Skin. I am absolutely seated for everything director Simon Schneckenburger does from here on out."
+      },
+      {
+        "programmer": "Darcy Wytko",
+        "role": "Shorts Programmer",
+        "blurb": "Skin on Skin: brutal, tender, masterful. Queer yearning meets grit. Can't stop thinking about it."
+      }
+    ],
+    "brave-new-world": [
+      {
+        "programmer": "Kimberly Dinehart",
+        "role": "Shorts Programmer",
+        "blurb": "I love dystopian fiction, and this shorts program is no exception. Two of my favorites \u2014 Plague Season, a horror-adjacent short from Ecuador, and Acid City, an animated trip through a futuristic city in a toxic wasteland."
+      },
+      {
+        "programmer": "Darcy Wytko",
+        "role": "Shorts Programmer",
+        "blurb": "Acid City: if we all live in an animated psychedelic ocean of acid someday, I hope we're this resilient. Also We Were Here \u2014 what if we all start taking jobs back from AI by pretending to be household appliances?"
+      }
+    ],
+    "reality-check": [
+      {
+        "programmer": "Kimberly Dinehart",
+        "role": "Shorts Programmer",
+        "blurb": "Every documentary short is a brief window into someone else's life, another part of our world that few get to see. In 90 minutes, you'll travel to rural Michigan, Russia, California, China, and La Palma."
+      },
+      {
+        "programmer": "Jesse Knight",
+        "role": "Shorts Programmer",
+        "blurb": "Some of the most invigorating work can be found in this eclectic mix of shorts by filmmakers redefining the nonfiction form in unexpected, ingenious, and unforgettable ways."
+      },
+      {
+        "programmer": "Darcy Wytko",
+        "role": "Shorts Programmer",
+        "blurb": "ERUCTATION: the world record for loudest female burp is 107.3 decibels and Kaylee wants to beat it. I want Kaylee to beat it too."
+      },
+      {
+        "programmer": "Nichole Young",
+        "role": "Shorts Programmer",
+        "blurb": "Educate, empathize, and inspire! Bring your tissues as you experience the breathtaking power of documentary film. Correct Me if I'm Wrong and Sea Song are two titles that've stayed with me long after their credits roll."
+      }
+    ],
+    "the-big-cheese": [
+      {
+        "programmer": "Kimberly Dinehart",
+        "role": "Shorts Programmer",
+        "blurb": "My heart was leavened by the short The Baker's Hotline (screening before The Big Cheese) about the wonderful people who run King Arthur Baking's Baker's Hotline."
+      }
+    ],
+    "eight-bridges": [
+      {
+        "programmer": "Kimberly Dinehart",
+        "role": "Shorts Programmer",
+        "blurb": "Slow cinema at its best challenges audience members to focus, be patient, and discover for themselves what meaning is held within each shot. What do you see when you really take the time to look?"
+      },
+      {
+        "programmer": "Andy Spletzer",
+        "role": "Programmer",
+        "blurb": "There is something hypnotically alluring about James Benning's work, like when you stand in front of a painting for more than a cursory look and notice the brush strokes, shadows, and details in the background. Like the title implies, the movie shows eight bridges in eight shots, from the Golden Gate to the Astoria-Megler bridges."
+      }
+    ],
+    "animation4adults": [
+      {
+        "programmer": "Rhys Iliakis",
+        "role": "SIFF Graphic Designer and Shorts Programmer",
+        "blurb": "Obviously. I curated this program with all the love and passion in my heart for the many forms of animation, and I want Seattle to bask in its glory."
+      },
+      {
+        "programmer": "Nichole Young",
+        "role": "Shorts Programmer",
+        "blurb": "Bring the kids! Actually, scratch that, leave 'em at home and enjoy this complex and heartfelt program all to yourself. Sip your favorite bevvy and laugh to Carcasonne-Acapulco and do some much needed self reflection with Once in a Body and Dog Alone."
+      }
+    ],
+    "another-world": [
+      {
+        "programmer": "Rhys Iliakis",
+        "role": "SIFF Graphic Designer and Shorts Programmer",
+        "blurb": "A gorgeous anime out of Hong Kong on reincarnation and what makes someone good. It's a larger-than-life film that spans across time and space. Your visual cortex will thank you for blessing them with this work of art."
+      }
+    ],
+    "cookie-queens": [
+      {
+        "programmer": "Megan Garbayo-L\u00f3pez",
+        "role": "Programmer",
+        "blurb": "As an adult Girl Scout who has been enrolled since I was 5 years old, seeing the magic of Girl Scout Cookie Season still going strong gives me something we all need a little bit of these days: hope."
+      },
+      {
+        "programmer": "Tracy Rector",
+        "role": "Programmer",
+        "blurb": "As a former Girl Scout and cookie-selling queen, I loved this film's portrait of femme empowerment. It captures the emotional highs and lows with humor while thoughtfully exploring personal agency."
+      }
+    ],
+    "songbirds-secret": [
+      {
+        "programmer": "Megan Garbayo-L\u00f3pez",
+        "role": "Programmer",
+        "blurb": "I am obsessed with this cut paper animation film from France that has some of the cutest animal character designs I have ever seen!"
+      }
+    ],
+    "rising-through-the-fray": [
+      {
+        "programmer": "Megan Garbayo-L\u00f3pez",
+        "role": "Programmer",
+        "blurb": "A crowdpleasing documentary about queer indigenous diasporic roller derby? SAY LESS."
+      }
+    ],
+    "the-family-picture-show": [
+      {
+        "programmer": "Megan Garbayo-L\u00f3pez",
+        "role": "Programmer",
+        "blurb": "Kid friendly films that adults will enjoy! We had such a wide range of submissions this year and showcasing this global talent is always the highlight of my festival season."
+      }
+    ],
+    "body-blow": [
+      {
+        "programmer": "Marcus Gorman",
+        "role": "Programmer",
+        "blurb": "The erotic thriller is back, and it's gayer and kinkier than ever! Enjoy chastity device-wearing undercover cops, twink fatales, drag queen crime bosses, puddles of sweat, and enough neon to power Tokyo."
+      },
+      {
+        "programmer": "Colleen O'Holleran",
+        "role": "Programmer",
+        "blurb": "Lots of raucous sex, a murder mystery, and a heartfelt romance weave through Body Blow. It's impossible not to sense the influence of Adrian Lyne, and of course I love that."
+      }
+    ],
+    "camp": [
+      {
+        "programmer": "Marcus Gorman",
+        "role": "Programmer",
+        "blurb": "There was a moment when the WTF section could've been renamed 'Oops! All Witches' until we figured our audiences wanted some variety. The hypnotic coming-of-age slow burn from Canadian filmmaker Avalon Fast."
+      },
+      {
+        "programmer": "Colleen O'Holleran",
+        "role": "Programmer",
+        "blurb": "Camp is a dreamy and melancholic exploration of grief, witchcraft, and friendship at a Christian summer camp in the woods. Zola Grimmer's performance is one of the best I've seen this year."
+      }
+    ],
+    "edie-arnold-is-a-loser": [
+      {
+        "programmer": "Marcus Gorman",
+        "role": "Programmer",
+        "blurb": "To use previous SIFF films, think of it as We Are the Best! in the Egghead & Twinkie style. A teen comedy for the women of punk rock who paved the way and the generations that followed."
+      },
+      {
+        "programmer": "Alison Jean Smith",
+        "role": "Festival Programming Coordinator",
+        "blurb": "As a rule, I adore coming-of-age films about teens starting a band (see, Sing Street) and this one hits all the right notes: funny, heartwarming, and with surprisingly catchy punk songs."
+      }
+    ],
+    "lucky-lu": [
+      {
+        "programmer": "Marcus Gorman",
+        "role": "Programmer",
+        "blurb": "A tense slice of neorealism as a Chinese immigrant tries to stay afloat in New York City."
+      },
+      {
+        "programmer": "Tracy Rector",
+        "role": "Programmer",
+        "blurb": "After seeing this gorgeous film at TIFF, my first thought was, how rare and powerful it is to experience true cinematic art. Every element from storytelling, performances, locations, and cinematography, is seamlessly interwoven into a remarkable whole."
+      }
+    ],
+    "marama": [
+      {
+        "programmer": "Marcus Gorman",
+        "role": "Programmer",
+        "blurb": "Gorgeous! Bloody! Infuriating! A M\u0101ori woman comes face to face with the horrors of colonialism in this angry, lush Gothic thriller set in Victorian England."
+      },
+      {
+        "programmer": "Colleen O'Holleran",
+        "role": "Programmer",
+        "blurb": "M\u0101rama follows a young M\u0101ori teacher in 1859 who makes the journey from Aotearoa, New Zealand to Yorkshire, England in search of her family's buried past. What she finds is a gothic reckoning with colonialism, blood, and fury."
+      },
+      {
+        "programmer": "Tracy Rector",
+        "role": "Programmer",
+        "blurb": "M\u0101rama moves through shadow and memory as an anti-colonial psychological horror film that names British violence while lifting the enduring power of M\u0101ori women. In their strength, culture survives, resists, and transforms."
+      }
+    ],
+    "obsession": [
+      {
+        "programmer": "Marcus Gorman",
+        "role": "Programmer",
+        "blurb": "'Be careful what you wish for' never hurt so good in Curry Barker's darkly comic, twisted horror fable. This absolutely kills with a full audience, so stay up late with us and pack this midnighter."
+      },
+      {
+        "programmer": "Colleen O'Holleran",
+        "role": "Programmer",
+        "blurb": "Sketch comedian turned horror filmmaker Curry Barker takes 'The Monkey's Paw' scenario and runs with it in Obsession \u2014 a wish fulfillment horror perfect for a midnight movie."
+      }
+    ],
+    "grayson-manor": [
+      {
+        "programmer": "Marcus Gorman",
+        "role": "Programmer",
+        "blurb": "Give him a hand. Or two while you're at it. A feature-length, queered-up 'Tales from the Crypt'-style creeper with Chris Colfer and Alice Krige trading barbs in an Irish manor."
+      },
+      {
+        "programmer": "Colleen O'Holleran",
+        "role": "Programmer",
+        "blurb": "If a soap opera melodrama and a 'Tales from the Crypt' episode had a love child, you would get The Restoration at Grayson Manor. Chris Colfer and Alice Krige are superb as a dysfunctional mother-son duo in this campy queer horror-comedy."
+      }
+    ],
+    "cuba-alaska": [
+      {
+        "programmer": "Kathleen Mullen",
+        "role": "Programmer",
+        "blurb": "A fast-moving, pulse-pounding portrait of two female medics, Cuba and Alaska, on the front lines of the war in Ukraine, whose friendship offers moments of laughter, honesty, and hope."
+      }
+    ],
+    "to-hold-a-mountain": [
+      {
+        "programmer": "Kathleen Mullen",
+        "role": "Programmer",
+        "blurb": "Semi-nomadic shepherd and cheesemaker Gara fiercely protects her land and family in the face of a NATO military takeover. Alongside her niece Nada, their stories unfold in a beautifully shot and deeply felt portrait of resilience and love."
+      },
+      {
+        "programmer": "Tracy Rector",
+        "role": "Programmer",
+        "blurb": "High in Montenegro's Sinjajevina plateau, To Hold a Mountain captures a mother and daughter living in deep relation to the land. A quiet cin\u00e9ma v\u00e9rit\u00e9 portrait of resilience and strength."
+      }
+    ],
+    "the-ascent": [
+      {
+        "programmer": "Kathleen Mullen",
+        "role": "Programmer",
+        "blurb": "Mandy Horvath, a bilateral amputee, is a force to be reckoned with as she climbs Mt. Kilimanjaro using only her hands."
+      }
+    ],
+    "hanging-by-a-wire": [
+      {
+        "programmer": "Kathleen Mullen",
+        "role": "Programmer",
+        "blurb": "On their way to school, a group of students riding a cable car across a canyon are suddenly left suspended midair when the cables fail. What is shown \u2014 and what is left unsaid \u2014 in this nail-biting documentary is what makes it so fascinating."
+      }
+    ],
+    "fifteen": [
+      {
+        "programmer": "Colleen O'Holleran",
+        "role": "Programmer",
+        "blurb": "Fifteen follows two outsiders whose dream quincea\u00f1era takes a horrifying turn when one's pregnancy reveals something decidedly not human. I recommend this one for anyone who craves a mashup of Heathers and Dead Alive!"
+      }
+    ],
+    "nightmare-elm-street-djnicfit": [
+      {
+        "programmer": "Colleen O'Holleran",
+        "role": "Programmer",
+        "blurb": "Come and see SIFF & CFC present A Nightmare on Elm Street with DJ NicFit. Don't sleep on it!"
+      }
+    ],
+    "shape-of-momo": [
+      {
+        "programmer": "Shailaja Rao",
+        "role": "Programmer",
+        "blurb": "Tribeny Rai makes a striking debut with Shape of Momo. Bishnu returns home to her Himalayan village and confronts the expectations placed on the women in her family and community."
+      }
+    ],
+    "roid": [
+      {
+        "programmer": "Shailaja Rao",
+        "role": "Programmer",
+        "blurb": "Mejbaur Rahman Sumon brings a painter's care to every frame of Roid. In rural Bangladesh, a farmer repeatedly abandons his wife, a woman the village considers mad. Folk tale, fable, and something harder to name."
+      }
+    ],
+    "teachings-of-the-elders": [
+      {
+        "programmer": "Tracy Rector",
+        "role": "Programmer",
+        "blurb": "This annual selection of Indigenous-made shorts returns with teachings from the Elders. At times cathartic, at times cautionary, and always essential, these stories carry forward deep lived histories of wisdom, artistry, and firsthand experience."
+      }
+    ],
+    "powwow-people": [
+      {
+        "programmer": "Tracy Rector",
+        "role": "Programmer",
+        "blurb": "As an immersive, observational story, Powwow People invites audiences to witness the unfolding of a powwow over the course of a single day. Emcee Reuben Little Head is the perfect guide, grounded, generous, and often hilarious."
+      }
+    ],
+    "kikuyu-land": [
+      {
+        "programmer": "Tracy Rector",
+        "role": "Programmer",
+        "blurb": "Colonialism is not past, it is present, persistent, and continues to displace people from their ancestral homelands while fracturing communities. Kikuyu Land brings this reality into sharp focus through investigative journalism and the enduring strength of the Kikuyu peoples."
+      }
+    ],
+    "franz": [
+      {
+        "programmer": "Martin Schwartz",
+        "role": "Programmer",
+        "blurb": "I love that Holland tries out a bushel of techniques and doesn't pretend to understand her endlessly enigmatic subject. Which would be a kafkaesque task in itself. As a museum guide points out in the film, the ratio of words Kafka wrote to words written about him is currently 1:10 million."
+      }
+    ],
+    "assets-liabilities": [
+      {
+        "programmer": "Alison Jean Smith",
+        "role": "Festival Programming Coordinator",
+        "blurb": "I adored local filmmaker Zach Weintraub's short film, Rad Dad, which played at Local Sightings a couple of years ago. His new feature revisits similar themes \u2014 namely, the tensions of modern parenting and trying to keep your cool in middle age \u2014 to charming, hilarious effect."
+      }
+    ],
+    "phoenix-jones": [
+      {
+        "programmer": "Alison Jean Smith",
+        "role": "Festival Programming Coordinator",
+        "blurb": "A fascinating deep-dive into Seattle's real-life superhero movement of the 2010s, with plenty of eccentric characters and unexpected twists."
+      }
+    ],
+    "radioheart": [
+      {
+        "programmer": "Alison Jean Smith",
+        "role": "Festival Programming Coordinator",
+        "blurb": "From the opening notes of The Replacements' ode to college radio, 'Left of the Dial,' I was sucked into this portrait of longtime DJ at KEXP and steward of the Seattle music scene, Kevin Cole."
+      }
+    ],
+    "maintenance-artist": [
+      {
+        "programmer": "Andy Spletzer",
+        "role": "Programmer",
+        "blurb": "Mierle Ukeles found art in the most mundane and overlooked tasks, and as the (unpaid) artist in residence at the NY Department of Sanitation she makes installations and performance pieces on a truly grand scale. The type of documentary that inspires you to see the art in your everyday life."
+      }
+    ],
+    "late-fame": [
+      {
+        "programmer": "Andy Spletzer",
+        "role": "Programmer",
+        "blurb": "Willem Dafoe plays a post office employee whose early book of poetry is 'rediscovered' by a group of aspiring artists who adopt him as an elder statesman, which gives him mixed feelings. Another great performance by Dafoe."
+      }
+    ],
+    "alt-shorts": [
+      {
+        "programmer": "Andy Spletzer",
+        "role": "Programmer",
+        "blurb": "From the visually poetic to found footage mash-ups, this year's Alt Shorts package ranges from somber to surreal to hilarious."
+      }
+    ],
+    "ghost-in-the-machine": [
+      {
+        "programmer": "Andy Spletzer",
+        "role": "Programmer",
+        "blurb": "Is AI racist? There is a strong case to believe it is, seeing as it's based on so many texts from the time when racism was commonplace, not to mention the ingestion of posts and rants from the wild west of social media. Another great doc with a point of view."
+      }
+    ],
+    "april-x": [
+      {
+        "programmer": "Nichole Young",
+        "role": "Shorts Programmer",
+        "blurb": "Boundaries are tested and morals questioned in this gritty, edge-of-your seat thriller set in a cyberpunk cityscape. Connor Storrie stuns as Bax in this suspenseful, sci-fi thrill ride."
+      }
+    ]
+  },
+  "siff_urls": {
+    "i-love-boosters": "https://www.siff.net/festival/i-love-boosters",
+    "power-ballad": "https://www.siff.net/festival/power-ballad",
+    "obsession": "https://www.siff.net/festival/obsession",
+    "nightmare-elm-street-djnicfit": "https://www.siff.net/festival/siff-and-cfc-present-a-nightmare-on-elm-street-with-dj-nicfit",
+    "the-invite": "https://www.siff.net/festival/the-invite",
+    "april-x": "https://www.siff.net/festival/april-x",
+    "drunken-noodles": "https://www.siff.net/festival/drunken-noodles",
+    "i-want-your-sex": "https://www.siff.net/festival/i-want-your-sex",
+    "late-fame": "https://www.siff.net/festival/late-fame",
+    "see-you-when-i-see-you": "https://www.siff.net/festival/see-you-when-i-see-you",
+    "valentina": "https://www.siff.net/festival/valentina",
+    "chili-finger": "https://www.siff.net/festival/chili-finger",
+    "edie-arnold-is-a-loser": "https://www.siff.net/festival/edie-arnold-is-a-loser",
+    "hot-water": "https://www.siff.net/festival/hot-water",
+    "if-i-go-will-they-miss-me": "https://www.siff.net/festival/if-i-go-will-they-miss-me",
+    "lucky-lu": "https://www.siff.net/festival/lucky-lu",
+    "again-again": "https://www.siff.net/festival/again-again",
+    "assets-liabilities": "https://www.siff.net/festival/assets-and-liabilities",
+    "radioheart": "https://www.siff.net/festival/radioheart-the-drive-and-times-of-dj-kevin-cole",
+    "the-life-we-leave": "https://www.siff.net/festival/the-life-we-leave",
+    "phoenix-jones": "https://www.siff.net/festival/phoenix-jones-the-rise-and-fall-of-a-real-life-superhero",
+    "sound-visions": "https://www.siff.net/festival/sound-visions",
+    "under-a-million-stars": "https://www.siff.net/festival/under-a-million-stars",
+    "100-sunset": "https://www.siff.net/festival/100-sunset",
+    "amrum": "https://www.siff.net/festival/amrum",
+    "balandrau": "https://www.siff.net/festival/balandrau-where-the-fierce-wind-blew",
+    "body-blow": "https://www.siff.net/festival/body-blow",
+    "case-137": "https://www.siff.net/festival/case-137",
+    "cotton-queen": "https://www.siff.net/festival/cotton-queen",
+    "deadline": "https://www.siff.net/festival/deadline",
+    "franz": "https://www.siff.net/festival/franz",
+    "happy-birthday": "https://www.siff.net/festival/happy-birthday",
+    "hen": "https://www.siff.net/festival/hen",
+    "hijra": "https://www.siff.net/festival/hijra",
+    "it-would-be-night-in-caracas": "https://www.siff.net/festival/it-would-be-night-in-caracas",
+    "maspalomas": "https://www.siff.net/festival/maspalomas",
+    "murder-in-the-building": "https://www.siff.net/festival/murder-in-the-building",
+    "primavera": "https://www.siff.net/festival/primavera",
+    "renoir": "https://www.siff.net/festival/renoir",
+    "shape-of-momo": "https://www.siff.net/festival/shape-of-momo",
+    "silent-friend": "https://www.siff.net/festival/silent-friend",
+    "sons-of-the-neon-night": "https://www.siff.net/festival/sons-of-the-neon-night",
+    "sundays": "https://www.siff.net/festival/sundays",
+    "three-goodbyes": "https://www.siff.net/festival/three-goodbyes",
+    "another-world": "https://www.siff.net/festival/another-world",
+    "becoming-human": "https://www.siff.net/festival/becoming-human",
+    "burn": "https://www.siff.net/festival/burn",
+    "en-route-to": "https://www.siff.net/festival/en-route-to",
+    "roid": "https://www.siff.net/festival/roid",
+    "trial-of-hein": "https://www.siff.net/festival/trial-of-hein",
+    "lady": "https://www.siff.net/festival/lady",
+    "tell-everyone": "https://www.siff.net/festival/tell-everyone",
+    "three-of-a-kind": "https://www.siff.net/festival/three-of-a-kind",
+    "the-friends-house-is-here": "https://www.siff.net/festival/the-friends-house-is-here",
+    "hold-onto-me": "https://www.siff.net/festival/hold-onto-me",
+    "salvation": "https://www.siff.net/festival/salvation",
+    "black-burns-fast": "https://www.siff.net/festival/black-burns-fast",
+    "promised-sky": "https://www.siff.net/festival/promised-sky",
+    "the-condor-daughter": "https://www.siff.net/festival/the-condor-daughter",
+    "the-garden-we-dreamed": "https://www.siff.net/festival/the-garden-we-dreamed",
+    "ivan-hadoum": "https://www.siff.net/festival/ivan-and-hadoum",
+    "the-red-hangar": "https://www.siff.net/festival/the-red-hangar",
+    "strange-river": "https://www.siff.net/festival/strange-river",
+    "the-best-summer": "https://www.siff.net/festival/the-best-summer",
+    "the-big-cheese": "https://www.siff.net/festival/the-big-cheese",
+    "birds-of-war": "https://www.siff.net/festival/birds-of-war",
+    "jaripeo": "https://www.siff.net/festival/jaripeo",
+    "kikuyu-land": "https://www.siff.net/festival/kikuyu-land",
+    "nuisance-bear": "https://www.siff.net/festival/nuisance-bear",
+    "the-seoul-guardians": "https://www.siff.net/festival/the-seoul-guardians",
+    "broken-english": "https://www.siff.net/festival/broken-english",
+    "american-doctor": "https://www.siff.net/festival/american-doctor",
+    "the-ascent": "https://www.siff.net/festival/the-ascent",
+    "barbara-forever": "https://www.siff.net/festival/barbara-forever",
+    "beat-the-lotto": "https://www.siff.net/festival/beat-the-lotto",
+    "boorman-and-the-devil": "https://www.siff.net/festival/boorman-and-the-devil",
+    "bucks-harbor": "https://www.siff.net/festival/bucks-harbor",
+    "cuba-alaska": "https://www.siff.net/festival/cuba-and-alaska",
+    "ghost-in-the-machine": "https://www.siff.net/festival/ghost-in-the-machine",
+    "hanging-by-a-wire": "https://www.siff.net/festival/hanging-by-a-wire",
+    "love-chaos-kin": "https://www.siff.net/festival/love-chaos-kin",
+    "maintenance-artist": "https://www.siff.net/festival/maintenance-artist",
+    "rising-through-the-fray": "https://www.siff.net/festival/rising-through-the-fray",
+    "reality-check": "https://www.siff.net/festival/reality-check",
+    "soul-patrol": "https://www.siff.net/festival/soul-patrol",
+    "to-hold-a-mountain": "https://www.siff.net/festival/to-hold-a-mountain",
+    "when-a-witness-recants": "https://www.siff.net/festival/when-a-witness-recants",
+    "yo": "https://www.siff.net/festival/yo-(love-is-a-rebellious-bird)",
+    "one-of-our-own": "https://www.siff.net/festival/one-of-our-own-a-tribute-to-joan-roca",
+    "fifteen": "https://www.siff.net/festival/fifteen",
+    "the-furious": "https://www.siff.net/festival/the-furious",
+    "grayson-manor": "https://www.siff.net/festival/the-restoration-at-grayson-manor",
+    "camp": "https://www.siff.net/festival/camp",
+    "gaua": "https://www.siff.net/festival/gaua",
+    "wtf-nightmare-fuel": "https://www.siff.net/festival/wtf-nightmare-fuel",
+    "marama": "https://www.siff.net/festival/marama",
+    "powwow-people": "https://www.siff.net/festival/powwow-people",
+    "teachings-of-the-elders": "https://www.siff.net/festival/teachings-of-the-elders",
+    "crystal-cross": "https://www.siff.net/festival/crystal-cross",
+    "meadowlarks": "https://www.siff.net/festival/meadowlarks",
+    "aanikoobijigan": "https://www.siff.net/festival/aanikoobijigan-ancestor/great-grandparent/great-grandchild",
+    "reservation-redemption": "https://www.siff.net/festival/reservation-redemption",
+    "cookie-queens": "https://www.siff.net/festival/cookie-queens",
+    "the-family-picture-show": "https://www.siff.net/festival/the-family-picture-show-x41551",
+    "songbirds-secret": "https://www.siff.net/festival/the-songbirds-secret",
+    "queen-kelly": "https://www.siff.net/festival/queen-kelly",
+    "prisoners-of-the-earth": "https://www.siff.net/festival/prisoners-of-the-earth",
+    "eight-bridges": "https://www.siff.net/festival/eight-bridges",
+    "alt-shorts": "https://www.siff.net/festival/alt-shorts",
+    "shortsfest-opening-night": "https://www.siff.net/festival/shortsfest-opening-night-x41555",
+    "animation4adults": "https://www.siff.net/festival/animation4adults-x41547",
+    "best-of-nffty": "https://www.siff.net/festival/best-of-nffty",
+    "brave-new-world": "https://www.siff.net/festival/brave-new-world",
+    "spacing-out": "https://www.siff.net/festival/spacing-out",
+    "tba-sat-5-9": "https://www.siff.net/festival/tba-sat-5-9",
+    "tba-sun-5-10": "https://www.siff.net/festival/tba-sun-5-10",
+    "tba-sat-5-16-pacsci-1": "https://www.siff.net/festival/tba-sat-5-16-pacsci-1",
+    "tba-sun-5-17-pacsci-1": "https://www.siff.net/festival/tba-sun-5-17-pacsci-1",
+    "tba-sun-5-17-pacsci-2": "https://www.siff.net/festival/tba-sun-5-17-pacsci-2",
+    "tba-sun-5-17-uptown": "https://www.siff.net/festival/tba-sun-5-17-uptown"
+  }
+}</script>
+<script>
+(function() {
+  const data = JSON.parse(document.getElementById('siff-data').textContent);
+  const { films, screenings_by_day: screeningsByDay, venues, venue_addresses: venueAddresses, film_picks: filmPicks, siff_urls: siffUrls } = data;
+
+  // ----- Build "all showings of a given film" index (for the cross-link UI) -----
+  const filmShowings = {}; // slug -> [{date, time, venue, runtime}]
+  Object.entries(screeningsByDay).forEach(([date, list]) => {
+    list.forEach(s => {
+      if (!filmShowings[s.slug]) filmShowings[s.slug] = [];
+      filmShowings[s.slug].push({ ...s, date });
+    });
+  });
+  Object.values(filmShowings).forEach(arr => arr.sort((a,b) => (a.date + a.time).localeCompare(b.date + b.time)));
+
+  // ----- Time helpers -----
+  const toMinutes = (hhmm) => {
+    const [h, m] = hhmm.split(':').map(Number);
+    return h * 60 + m;
+  };
+  const pad = (n) => String(n).padStart(2, '0');
+  const formatTime = (hhmm) => {
+    const [h, m] = hhmm.split(':').map(Number);
+    if (h === 23 && m === 59) return 'Midnight';
+    const ampm = h >= 12 ? 'pm' : 'am';
+    const h12 = h === 0 ? 12 : (h > 12 ? h - 12 : h);
+    return `${h12}:${pad(m)} ${ampm}`;
+  };
+  const formatTimeRange = (start, duration) => {
+    const startMin = toMinutes(start);
+    const endMin = startMin + duration;
+    const endH = Math.floor(endMin / 60) % 24;
+    const endM = endMin % 60;
+    return `${formatTime(start)} – ${formatTime(`${pad(endH)}:${pad(endM)}`)}`;
+  };
+
+  // ----- Conflict grouping -----
+  // Two screenings conflict iff their intervals [start, start+runtime) overlap pairwise.
+  // A conflict GROUP is a set of screenings that all pairwise overlap with each other —
+  // i.e., you truly have to pick one among them. This is the interval-graph clique.
+  //
+  // Algorithm: sort by start. Maintain groups; an item joins a group iff its start is
+  // before the EARLIEST end in that group (meaning it overlaps with every member).
+  // If it can't join any group, start a new one.
+  const buildSlots = (screenings) => {
+    const items = screenings.map((s, i) => ({
+      ...s,
+      id: i,
+      startMin: toMinutes(s.time),
+      endMin: toMinutes(s.time) + s.runtime,
+    })).sort((a, b) => a.startMin - b.startMin);
+
+    const groups = [];
+    items.forEach(item => {
+      let joined = false;
+      for (const g of groups) {
+        // For item to truly conflict with EVERY member of g, it must start before
+        // the earliest end in g (i.e., before any member has finished).
+        const earliestEnd = Math.min(...g.map(m => m.endMin));
+        if (item.startMin < earliestEnd) {
+          g.push(item);
+          joined = true;
+          break;
+        }
+      }
+      if (!joined) groups.push([item]);
+    });
+    return groups;
+  };
+
+  // ----- Date helpers -----
+  const weekdays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const weekdayLong = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const parseDate = (yyyymmdd) => {
+    const [y, m, d] = yyyymmdd.split('-').map(Number);
+    return new Date(y, m - 1, d);
+  };
+
+  // ----- Filter state -----
+  const state = {
+    venue: 'all',
+    picks: 'all', // 'all' | 'any' (only programmer-picked films)
+    skipped: 'show', // 'show' | 'hide' (hide films marked not-interested)
+    view: 'schedule', // 'schedule' | 'picks'
+  };
+
+  // Module-scoped placeholder; assigned inside init() after rendering
+  let applyFilters = () => {};
+
+  // ===========================================================================
+  // PICKS & SKIPS (persistent across sessions)
+  // ===========================================================================
+  // Storage strategy: write to BOTH backends when available.
+  //   1. localStorage — works when the file is downloaded and opened locally.
+  //      Per-browser-per-device; survives browser restarts.
+  //   2. window.storage — Claude's artifact storage. Works when the file is
+  //      opened via the artifact link. May sync across Claude sessions.
+  // On load, we check both and merge — whichever has values, we use them.
+  // On save, we write to both (whichever is available).
+  //
+  // picks: keyed by pickId (date|time|slug|venue) — a specific screening you
+  //        want to attend
+  // skips: keyed by film slug — a film you're not interested in (dims all its
+  //        screenings)
+  // ===========================================================================
+  const PICKS_KEY = 'siff2026-picks';
+  const SKIPS_KEY = 'siff2026-skips';
+  const picks = new Set();
+  const skips = new Set();
+  let backends = { localStorage: false, artifact: false };
+
+  const hasArtifactStorage = () => !!(window.storage && typeof window.storage.get === 'function');
+  const hasLocalStorage = () => {
+    try {
+      const test = '__siff_test__';
+      window.localStorage.setItem(test, '1');
+      window.localStorage.removeItem(test);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  };
+
+  // Generic load: returns a Set populated from both backends
+  const loadSet = async (key) => {
+    const loaded = new Set();
+    if (backends.artifact) {
+      try {
+        const res = await window.storage.get(key);
+        if (res && res.value) {
+          const arr = typeof res.value === 'string' ? JSON.parse(res.value) : res.value;
+          if (Array.isArray(arr)) arr.forEach(id => loaded.add(id));
+        }
+      } catch (_) { /* key doesn't exist, fine */ }
+    }
+    if (backends.localStorage) {
+      try {
+        const raw = window.localStorage.getItem(key);
+        if (raw) {
+          const arr = JSON.parse(raw);
+          if (Array.isArray(arr)) arr.forEach(id => loaded.add(id));
+        }
+      } catch (_) { /* malformed, fine */ }
+    }
+    return loaded;
+  };
+
+  // Generic save
+  const saveSet = async (key, set) => {
+    const serialized = JSON.stringify(Array.from(set));
+    if (backends.localStorage) {
+      try { window.localStorage.setItem(key, serialized); }
+      catch (err) { console.warn(`localStorage save (${key}) failed:`, err); }
+    }
+    if (backends.artifact) {
+      try {
+        await window.storage.set(key, serialized);
+      } catch (err) {
+        // If artifact storage fails (e.g. server error), disable it for the rest
+        // of the session and log once. localStorage handles persistence either way.
+        if (!backends.artifactWarned) {
+          console.info('Artifact storage unavailable — using local browser storage only.');
+          backends.artifactWarned = true;
+        }
+        backends.artifact = false;
+        // Update the storage notice to reflect the change
+        const noticeEl = document.getElementById('storage-notice');
+        if (noticeEl && backends.localStorage) {
+          noticeEl.textContent = picks.size
+            ? `★ ${picks.size} saved pick${picks.size === 1 ? '' : 's'} loaded · persists on this browser`
+            : `★ Picks will persist on this browser`;
+        }
+      }
+    }
+  };
+
+  // Generic delete
+  const clearKey = async (key) => {
+    if (backends.localStorage) {
+      try { window.localStorage.removeItem(key); } catch (_) {}
+    }
+    if (backends.artifact) {
+      try { await window.storage.delete(key); } catch (_) {}
+    }
+  };
+
+  const loadPicks = async () => {
+    backends.localStorage = hasLocalStorage();
+    backends.artifact = hasArtifactStorage();
+    const loaded = await loadSet(PICKS_KEY);
+    loaded.forEach(id => picks.add(id));
+    const skipsLoaded = await loadSet(SKIPS_KEY);
+    skipsLoaded.forEach(slug => skips.add(slug));
+  };
+
+  const savePicks = () => saveSet(PICKS_KEY, picks);
+  const saveSkips = () => saveSet(SKIPS_KEY, skips);
+
+  const clearPicks = async () => {
+    picks.clear();
+    await clearKey(PICKS_KEY);
+  };
+  const clearSkips = async () => {
+    skips.clear();
+    await clearKey(SKIPS_KEY);
+  };
+
+  const togglePick = (item, cardEl) => {
+    const id = pickIdFor(item);
+    let isNowPicked;
+    if (picks.has(id)) {
+      picks.delete(id);
+      isNowPicked = false;
+    } else {
+      picks.add(id);
+      isNowPicked = true;
+    }
+    // Sync all cards that share this pickId (same film can be rendered in picks view too)
+    const escId = (typeof CSS !== 'undefined' && CSS.escape) ? CSS.escape(id) : id.replace(/["\\]/g, '\\$&');
+    document.querySelectorAll(`.film-card[data-pick-id="${escId}"]`).forEach(c => {
+      c.classList.toggle('picked', isNowPicked);
+      const btn = c.querySelector('.pick-btn');
+      if (btn) {
+        btn.classList.toggle('picked', isNowPicked);
+        btn.textContent = isNowPicked ? '★' : '☆';
+        btn.title = isNowPicked ? 'Remove from My Picks' : 'Add to My Picks';
+        btn.setAttribute('aria-label', isNowPicked ? 'Remove from picks' : 'Add to picks');
+      }
+    });
+    savePicks();
+    updatePicksUI();
+    // If we're currently viewing picks, re-render so the removed pick disappears
+    if (state.view === 'picks') renderPicksView();
+  };
+
+  const toggleSkip = (slug) => {
+    let isNowSkipped;
+    if (skips.has(slug)) {
+      skips.delete(slug);
+      isNowSkipped = false;
+    } else {
+      skips.add(slug);
+      // If marking as skip, also remove from picks (any screening of this film)
+      // — you can't both want to see and skip a film
+      const screeningsOfFilm = filmShowings[slug] || [];
+      screeningsOfFilm.forEach(sc => {
+        const id = pickIdFor(sc);
+        if (picks.has(id)) picks.delete(id);
+      });
+      isNowSkipped = true;
+    }
+    // Sync all cards of this slug — find them by data-slug
+    const escSlug = (typeof CSS !== 'undefined' && CSS.escape) ? CSS.escape(slug) : slug.replace(/["\\]/g, '\\$&');
+    document.querySelectorAll(`.film-card[data-slug="${escSlug}"]`).forEach(c => {
+      c.classList.toggle('skipped', isNowSkipped);
+      // If we just skipped, also drop the .picked class
+      if (isNowSkipped) c.classList.remove('picked');
+      const skipBtn = c.querySelector('.skip-btn');
+      if (skipBtn) {
+        skipBtn.classList.toggle('skipped', isNowSkipped);
+        skipBtn.textContent = isNowSkipped ? '✕' : '⊘';
+        skipBtn.title = isNowSkipped ? 'Remove "Not interested"' : 'Mark as not interested';
+      }
+      const pickBtn = c.querySelector('.pick-btn');
+      if (pickBtn && isNowSkipped) {
+        pickBtn.classList.remove('picked');
+        pickBtn.textContent = '☆';
+      }
+    });
+    saveSkips();
+    if (isNowSkipped) savePicks(); // we may have removed some picks
+    updatePicksUI();
+    updateSkipsUI();
+    if (state.view === 'picks') renderPicksView();
+    applyFilters();
+  };
+
+  const updateSkipsUI = () => {
+    const skipsStat = document.getElementById('stat-skips');
+    if (skipsStat) skipsStat.textContent = skips.size;
+  };
+
+  const updatePicksUI = () => {
+    document.getElementById('stat-picks').textContent = picks.size;
+    const picksTab = document.getElementById('picks-tab');
+    if (picksTab) {
+      picksTab.querySelector('.day-tab-date').textContent = picks.size
+        ? `${picks.size} film${picks.size === 1 ? '' : 's'}`
+        : 'Empty';
+    }
+  };
+
+  // ===========================================================================
+  // PICKS VIEW — renders the picked screenings, day-grouped, with conflict
+  // detection across what you've picked.
+  // ===========================================================================
+  const renderPicksView = () => {
+    picksViewEl.innerHTML = '';
+
+    if (picks.size === 0) {
+      picksViewEl.innerHTML = `
+        <div class="picks-empty">
+          <div class="picks-empty-title">No picks yet</div>
+          <p>Browse the schedule and tap the ☆ on any film to save it here.</p>
+          <p style="margin-top: 0.75rem; font-size: 0.85rem;">Your picks will persist across visits.</p>
+        </div>
+      `;
+      return;
+    }
+
+    // Gather picked screenings, attaching full item data
+    const pickedItems = [];
+    Object.entries(screeningsByDay).forEach(([date, list]) => {
+      list.forEach(s => {
+        const id = pickIdFor({ ...s, date });
+        if (picks.has(id)) pickedItems.push({ ...s, date });
+      });
+    });
+
+    // Group by day
+    const byDay = {};
+    pickedItems.forEach(item => {
+      if (!byDay[item.date]) byDay[item.date] = [];
+      byDay[item.date].push(item);
+    });
+
+    // Check cross-pick conflicts within each day
+    let totalPickConflicts = 0;
+    Object.values(byDay).forEach(dayItems => {
+      const groups = buildSlots(dayItems);
+      totalPickConflicts += groups.filter(g => g.length > 1).length;
+    });
+
+    // Header area with actions and warning
+    const actions = document.createElement('div');
+    actions.className = 'picks-actions';
+    actions.innerHTML = `
+      <span style="font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-dim);">
+        ${picks.size} film${picks.size === 1 ? '' : 's'} saved · across ${Object.keys(byDay).length} day${Object.keys(byDay).length === 1 ? '' : 's'}${skips.size ? ` · ${skips.size} marked not interested` : ''}
+      </span>
+      <button class="picks-action-btn" id="clear-picks-btn">Clear all picks</button>
+      ${skips.size ? `<button class="picks-action-btn" id="clear-skips-btn">Clear all not-interested marks</button>` : ''}
+    `;
+    picksViewEl.appendChild(actions);
+
+    if (totalPickConflicts > 0) {
+      const warn = document.createElement('div');
+      warn.className = 'picks-warning';
+      warn.innerHTML = `
+        <strong>Heads up:</strong> you have ${totalPickConflicts} overlapping pick${totalPickConflicts === 1 ? '' : 's'}.
+        You can't make it to both. Tap the star to drop whichever one you'd skip.
+      `;
+      picksViewEl.appendChild(warn);
+    }
+
+    // Render each day
+    const sortedDays = Object.keys(byDay).sort();
+    sortedDays.forEach(date => {
+      const dt = parseDate(date);
+      const dayItems = byDay[date];
+      const slots = buildSlots(dayItems);
+
+      const dayGroup = document.createElement('div');
+      dayGroup.className = 'picks-day-group';
+
+      const label = document.createElement('div');
+      label.className = 'picks-day-label';
+      label.innerHTML = `
+        <span class="picks-day-weekday">${weekdayLong[dt.getDay()]}</span>
+        <span class="picks-day-date">${months[dt.getMonth()]} ${dt.getDate()}</span>
+        <span style="margin-left: auto; font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-faint); letter-spacing: 0.05em;">
+          ${dayItems.length} pick${dayItems.length === 1 ? '' : 's'}
+        </span>
+      `;
+      dayGroup.appendChild(label);
+
+      slots.forEach(group => {
+        const slotEl = document.createElement('div');
+        slotEl.className = 'slot' + (group.length > 1 ? ' has-conflict' : '');
+        if (group.length > 1) {
+          const minStart = Math.min(...group.map(g => g.startMin));
+          const maxEnd = Math.max(...group.map(g => g.endMin));
+          const startH = pad(Math.floor(minStart / 60)); const startM = pad(minStart % 60);
+          const endH = pad(Math.floor(maxEnd / 60) % 24); const endM = pad(maxEnd % 60);
+          slotEl.innerHTML = `
+            <div class="slot-header">
+              <span class="slot-badge">Pick Conflict</span>
+              <span class="slot-time-range">${formatTime(`${startH}:${startM}`)} – ${formatTime(`${endH}:${endM}`)}</span>
+              <span>You picked ${group.length} overlapping films</span>
+            </div>
+            <div class="films-row"></div>
+          `;
+        } else {
+          slotEl.innerHTML = `<div class="films-row"></div>`;
+        }
+        const row = slotEl.querySelector('.films-row');
+        group.forEach(item => row.appendChild(renderFilmCard(item)));
+        dayGroup.appendChild(slotEl);
+      });
+
+      picksViewEl.appendChild(dayGroup);
+    });
+
+    // Wire up clear button
+    document.getElementById('clear-picks-btn').addEventListener('click', async () => {
+      if (!confirm(`Clear all ${picks.size} picks? This can't be undone.`)) return;
+      await clearPicks();
+      // Un-star all cards
+      document.querySelectorAll('.film-card.picked').forEach(c => c.classList.remove('picked'));
+      document.querySelectorAll('.pick-btn.picked').forEach(b => {
+        b.classList.remove('picked');
+        b.textContent = '☆';
+        b.title = 'Add to My Picks';
+      });
+      updatePicksUI();
+      renderPicksView();
+    });
+
+    // Wire up clear-skips button (only present if there are skips)
+    const clearSkipsBtn = document.getElementById('clear-skips-btn');
+    if (clearSkipsBtn) {
+      clearSkipsBtn.addEventListener('click', async () => {
+        if (!confirm(`Clear all ${skips.size} "not interested" marks? This can't be undone.`)) return;
+        await clearSkips();
+        document.querySelectorAll('.film-card.skipped').forEach(c => c.classList.remove('skipped'));
+        document.querySelectorAll('.skip-btn.skipped').forEach(b => {
+          b.classList.remove('skipped');
+          b.textContent = '⊘';
+          b.title = 'Mark as not interested';
+        });
+        updateSkipsUI();
+        renderPicksView();
+        applyFilters();
+      });
+    }
+  };
+
+  const setView = (view) => {
+    state.view = view;
+    if (view === 'picks') {
+      picksViewEl.classList.add('active');
+      scheduleViewEl.style.display = 'none';
+      renderPicksView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      picksViewEl.classList.remove('active');
+      scheduleViewEl.style.display = '';
+    }
+  };
+
+  // ----- Render everything -----
+  const dates = Object.keys(screeningsByDay).sort();
+
+  // Count totals
+  let totalScreenings = 0;
+  dates.forEach(d => totalScreenings += screeningsByDay[d].length);
+  const uniqueFilms = new Set();
+  dates.forEach(d => screeningsByDay[d].forEach(s => uniqueFilms.add(s.slug)));
+  const usedVenues = new Set();
+  dates.forEach(d => screeningsByDay[d].forEach(s => usedVenues.add(s.venue)));
+
+  document.getElementById('stat-screenings').textContent = totalScreenings;
+  document.getElementById('stat-films').textContent = uniqueFilms.size;
+  document.getElementById('stat-venues').textContent = usedVenues.size;
+  document.getElementById('stat-days').textContent = dates.length;
+  document.getElementById('stat-prog-picks').textContent = filmPicks ? Object.keys(filmPicks).length : 0;
+
+  // Count conflict slots across festival (sum of all groups with 2+ items)
+  let conflictSlotCount = 0;
+  dates.forEach(d => {
+    const slots = buildSlots(screeningsByDay[d]);
+    conflictSlotCount += slots.filter(g => g.length > 1).length;
+  });
+  document.getElementById('stat-conflicts').textContent = conflictSlotCount;
+
+  // ===========================================================================
+  // INIT (async so we can load picks from persistent storage first)
+  // Called at the bottom of this script, after all const helpers are defined.
+  // ===========================================================================
+  async function init() {
+    await loadPicks();
+
+    // Update storage notice
+    const noticeEl = document.getElementById('storage-notice');
+    if (backends.localStorage || backends.artifact) {
+      const where = [];
+      if (backends.localStorage) where.push('this browser');
+      if (backends.artifact) where.push('Claude');
+      const msg = picks.size
+        ? `★ ${picks.size} saved pick${picks.size === 1 ? '' : 's'} loaded · persists on ${where.join(' + ')}`
+        : `★ Picks will persist on ${where.join(' + ')}`;
+      noticeEl.textContent = msg;
+    } else {
+      noticeEl.classList.add('warning');
+      noticeEl.textContent = '⚠ Storage disabled in this browser — picks won\'t save between visits.';
+    }
+
+    // ----- Day tabs (with "My Picks" tab prepended) -----
+    const dayTabsEl = document.getElementById('day-tabs');
+
+    // My Picks tab (special)
+    const picksTabBtn = document.createElement('button');
+    picksTabBtn.className = 'day-tab picks-tab';
+    picksTabBtn.id = 'picks-tab';
+    picksTabBtn.innerHTML = `
+      <span class="day-tab-weekday">★ My Picks</span>
+      <span class="day-tab-date">${picks.size ? `${picks.size} film${picks.size === 1 ? '' : 's'}` : 'Empty'}</span>
+    `;
+    picksTabBtn.onclick = () => {
+      document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+      picksTabBtn.classList.add('active');
+      setView('picks');
+    };
+    dayTabsEl.appendChild(picksTabBtn);
+
+    // Day tabs
+    dates.forEach((d, i) => {
+      const dt = parseDate(d);
+      const btn = document.createElement('button');
+      btn.className = 'day-tab' + (i === 0 ? ' active' : '');
+      btn.dataset.date = d;
+      btn.innerHTML = `
+        <span class="day-tab-weekday">${weekdays[dt.getDay()]}</span>
+        <span class="day-tab-date">${months[dt.getMonth()]} ${dt.getDate()}</span>
+      `;
+      btn.onclick = () => {
+        document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        setView('schedule');
+        // scrollIntoView needs a moment if we just switched views
+        requestAnimationFrame(() => {
+          document.getElementById('day-' + d).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      };
+      dayTabsEl.appendChild(btn);
+    });
+
+    // ----- Render each day -----
+    dates.forEach(d => scheduleViewEl.appendChild(renderDay(d)));
+
+    updatePicksUI();
+    updateSkipsUI();
+    applyFilters = () => {
+      document.querySelectorAll('#schedule-view .film-card').forEach(card => {
+        const venueOk = state.venue === 'all' || card.dataset.venue === state.venue;
+        const picksOk = state.picks === 'all' || card.dataset.hasPicks === '1';
+        const skippedOk = state.skipped === 'show' || !card.classList.contains('skipped');
+        card.style.display = (venueOk && picksOk && skippedOk) ? '' : 'none';
+      });
+      document.querySelectorAll('#schedule-view .slot').forEach(slot => {
+        const anyVisible = Array.from(slot.querySelectorAll('.film-card')).some(c => c.style.display !== 'none');
+        slot.style.display = anyVisible ? '' : 'none';
+      });
+    };
+
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const type = pill.dataset.filterType;
+        const val = pill.dataset.filterValue;
+        if (type === 'picks') {
+          // Toggle behavior: click again to clear
+          if (pill.classList.contains('active')) {
+            pill.classList.remove('active');
+            state.picks = 'all';
+          } else {
+            pill.classList.add('active');
+            state.picks = val;
+          }
+        } else if (type === 'skipped') {
+          // Toggle: hide skipped on/off
+          if (pill.classList.contains('active')) {
+            pill.classList.remove('active');
+            state.skipped = 'show';
+          } else {
+            pill.classList.add('active');
+            state.skipped = val; // 'hide'
+          }
+        } else {
+          // Venue filter is exclusive (radio-button-style)
+          document.querySelectorAll(`.filter-pill[data-filter-type="${type}"]`).forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          state[type] = val;
+        }
+        applyFilters();
+      });
+    });
+
+    // ----- Active day tab on scroll (only in schedule view) -----
+    const sections = dates.map(d => document.getElementById('day-' + d));
+    const onScroll = () => {
+      if (state.view !== 'schedule') return;
+      const navH = document.querySelector('nav.days').offsetHeight + 80;
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.getBoundingClientRect().top <= navH) current = s;
+      }
+      if (current) {
+        const d = current.id.replace('day-', '');
+        document.querySelectorAll('.day-tab').forEach(t => {
+          t.classList.toggle('active', t.dataset.date === d);
+        });
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+  }
+
+  // (Function declarations for renderFilmCard, renderDay etc. follow, then we call init().)
+
+  // ----- Render each day -----
+  const mainEl = document.getElementById('main');
+  const scheduleViewEl = document.getElementById('schedule-view');
+  const picksViewEl = document.getElementById('picks-view');
+
+  const pickIdFor = (item) => `${item.date || ''}|${item.time}|${item.slug}|${item.venue}`;
+
+  const renderFilmCard = (item) => {
+    const film = films[item.slug] || { title: item.slug, desc: '', runtime: item.runtime };
+    const card = document.createElement('div');
+    card.className = 'film-card';
+    card.dataset.venue = item.venue;
+    const pickId = pickIdFor(item);
+    card.dataset.pickId = pickId;
+    if (picks.has(pickId)) card.classList.add('picked');
+
+    const allShowings = filmShowings[item.slug] || [];
+    const myShowingIdx = allShowings.findIndex(s =>
+      s.date === item.date && s.time === item.time && s.venue === item.venue
+    );
+    const totalShowings = allShowings.length;
+    // Only show the counter if there are multiple showings; solo screenings don't need it
+    const showingNumberHTML = (totalShowings > 1 && myShowingIdx >= 0)
+      ? `<span class="showing-num" title="Showing ${myShowingIdx + 1} of ${totalShowings}">${myShowingIdx + 1} / ${totalShowings}</span>`
+      : '';
+
+    const other = allShowings.filter(s =>
+      !(s.date === item.date && s.time === item.time && s.venue === item.venue)
+    );
+
+    const premiereHTML = film.premiere ? `<div class="film-premiere">${film.premiere}</div>` : '';
+    const tagHTML = film.tag ? `<div class="film-tag">${film.tag}</div>` : '';
+
+    const categoriesHTML = (film.categories || []).slice(0, 2).map(c =>
+      `<span class="film-cat">${c}</span>`
+    ).join('');
+
+    const credits = film.credits ? `<div class="film-credits">${film.credits}</div>` : '';
+    const countryYear = film.country ? `<div class="film-credits">${film.country} · ${film.year}</div>` : '';
+
+    const otherShowingsHTML = other.length ? `
+      <div class="other-showings">
+        <div class="other-showings-label">All ${totalShowings} showings of ${film.title}</div>
+        ${allShowings.map((s, idx) => {
+          const dt = parseDate(s.date);
+          const isThis = s.date === item.date && s.time === item.time && s.venue === item.venue;
+          const venueLabel = venues[s.venue].replace('SIFF ', '').replace(' Theatre','').replace('Cinema ','');
+          const label = `#${idx + 1} · ${weekdays[dt.getDay()]} ${dt.getDate()} · ${formatTime(s.time)} · ${venueLabel}`;
+          return isThis
+            ? `<span class="other-showing this-showing">► ${label} <span class="you-are-here">(you're viewing this)</span></span>`
+            : `<a class="other-showing" data-goto-date="${s.date}">${label}</a>`;
+        }).join('')}
+      </div>
+    ` : '';
+
+    const trailerQuery = encodeURIComponent(`${film.title} trailer 2026`);
+    const trailerURL = `https://www.youtube.com/results?search_query=${trailerQuery}`;
+    const siffURL = (siffUrls && siffUrls[item.slug]) || null;
+    const siffLinkHTML = siffURL
+      ? `<a class="siff-link-btn" href="${siffURL}" target="_blank" rel="noopener">Tickets & info ↗</a>`
+      : '';
+
+    // Programmer's picks for this film (if any)
+    const programmerPicks = (filmPicks && filmPicks[item.slug]) || [];
+    const hasPicks = programmerPicks.length > 0;
+    if (hasPicks) card.classList.add('has-picks');
+    card.dataset.hasPicks = hasPicks ? '1' : '0';
+
+    const picksBadgeHTML = hasPicks
+      ? `<span class="picks-badge" title="${programmerPicks.length} programmer${programmerPicks.length === 1 ? '' : 's'} picked this">★ <span class="picks-count">${programmerPicks.length}</span> pick${programmerPicks.length === 1 ? '' : 's'}</span>`
+      : '';
+
+    const programmerPicksHTML = hasPicks ? `
+      <div class="programmer-picks">
+        <div class="programmer-picks-label">
+          ★ Picked by ${programmerPicks.length} programmer${programmerPicks.length === 1 ? '' : 's'}
+        </div>
+        ${programmerPicks.map(p => `
+          <div class="programmer-pick">
+            <div class="programmer-pick-name">${p.programmer}</div>
+            <div class="programmer-pick-role">${p.role}</div>
+            <div class="programmer-pick-blurb">"${p.blurb}"</div>
+          </div>
+        `).join('')}
+      </div>
+    ` : '';
+
+    const isPicked = picks.has(pickId);
+    const isSkipped = skips.has(item.slug);
+    if (isSkipped) card.classList.add('skipped');
+    card.dataset.slug = item.slug;
+    card.innerHTML = `
+      <button class="pick-btn ${isPicked ? 'picked' : ''}" title="${isPicked ? 'Remove from My Picks' : 'Add to My Picks'}" aria-label="${isPicked ? 'Remove from picks' : 'Add to picks'}">${isPicked ? '★' : '☆'}</button>
+      <button class="skip-btn ${isSkipped ? 'skipped' : ''}" title="${isSkipped ? 'Remove \"Not interested\"' : 'Mark as not interested'}" aria-label="${isSkipped ? 'Remove not interested' : 'Mark as not interested'}">${isSkipped ? '✕' : '⊘'}</button>
+      <div class="film-meta-row">
+        <span class="film-time">${formatTime(item.time)}</span>
+        <span class="film-meta-right">
+          <span class="film-venue venue-${item.venue}">${venues[item.venue].replace('SIFF ','')}</span>
+          ${showingNumberHTML}
+        </span>
+      </div>
+      <div class="film-title">${film.title}</div>
+      <div class="film-tagline">${film.desc || ''}</div>
+      <div class="film-footer">
+        <span class="film-runtime">${item.runtime} min</span>
+        <div class="film-categories">${picksBadgeHTML}${categoriesHTML}</div>
+      </div>
+      <div class="film-detail">
+        ${premiereHTML}
+        ${tagHTML}
+        ${credits}
+        ${countryYear}
+        <button class="trailer-btn" data-trailer-query="${trailerQuery}">
+          ▶ Watch Trailer (YouTube)
+        </button>
+        ${siffLinkHTML}
+        <div class="trailer-embed">
+          <iframe src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        ${programmerPicksHTML}
+        ${otherShowingsHTML}
+      </div>
+    `;
+
+    // Expand/collapse
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.trailer-btn') || e.target.closest('.siff-link-btn') || e.target.closest('.other-showing') || e.target.closest('.trailer-embed') || e.target.closest('.pick-btn') || e.target.closest('.skip-btn')) {
+        return; // let those handle themselves
+      }
+      card.classList.toggle('open');
+    });
+
+    // Star/pick button
+    card.querySelector('.pick-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePick(item, card);
+    });
+
+    // Skip button (mark "not interested")
+    card.querySelector('.skip-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleSkip(item.slug);
+    });
+
+    // Trailer button opens YouTube search in new tab (reliable for every film)
+    card.querySelector('.trailer-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.open(trailerURL, '_blank', 'noopener');
+    });
+
+    // Other showing clicks → jump to that day
+    card.querySelectorAll('.other-showing').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const d = el.dataset.gotoDate;
+        const tgt = document.getElementById('day-' + d);
+        if (tgt) {
+          tgt.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.querySelectorAll('.day-tab').forEach(t => {
+            t.classList.toggle('active', t.dataset.date === d);
+          });
+        }
+      });
+    });
+
+    return card;
+  };
+
+  const renderDay = (date) => {
+    const section = document.createElement('section');
+    section.className = 'day';
+    section.id = 'day-' + date;
+    const dt = parseDate(date);
+
+    const allScreenings = screeningsByDay[date].map(s => ({ ...s, date }));
+    const slots = buildSlots(allScreenings);
+    const numConflictSlots = slots.filter(g => g.length > 1).length;
+
+    const header = document.createElement('div');
+    header.className = 'day-header';
+    header.innerHTML = `
+      <div>
+        <div class="day-header-weekday">${weekdayLong[dt.getDay()]}</div>
+        <div class="day-header-date">${months[dt.getMonth()]} ${dt.getDate()}</div>
+      </div>
+      <div class="day-header-meta">
+        ${allScreenings.length} screenings ·
+        ${numConflictSlots > 0 ? `<strong>${numConflictSlots} conflict${numConflictSlots>1?'s':''}</strong>` : 'no conflicts'}
+      </div>
+    `;
+    section.appendChild(header);
+
+    slots.forEach((group, gi) => {
+      const slotEl = document.createElement('div');
+      slotEl.className = 'slot' + (group.length > 1 ? ' has-conflict' : '');
+
+      if (group.length > 1) {
+        const minStart = Math.min(...group.map(g => g.startMin));
+        const maxEnd = Math.max(...group.map(g => g.endMin));
+        const startH = pad(Math.floor(minStart / 60)); const startM = pad(minStart % 60);
+        const endH = pad(Math.floor(maxEnd / 60) % 24); const endM = pad(maxEnd % 60);
+        slotEl.innerHTML = `
+          <div class="slot-header">
+            <span class="slot-badge">Conflict · pick one</span>
+            <span class="slot-time-range">${formatTime(`${startH}:${startM}`)} – ${formatTime(`${endH}:${endM}`)}</span>
+            <span>${group.length} films overlap</span>
+          </div>
+          <div class="films-row"></div>
+        `;
+      } else {
+        slotEl.innerHTML = `<div class="films-row"></div>`;
+      }
+      const row = slotEl.querySelector('.films-row');
+      group.forEach(item => row.appendChild(renderFilmCard(item)));
+      section.appendChild(slotEl);
+    });
+
+    return section;
+  };
+
+  // All declarations in place — kick off initialization.
+  init();
+
+})();
+</script>
+</body>
+</html>
